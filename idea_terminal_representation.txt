@@ -1,0 +1,15 @@
+
+    1 2 3 4 5 6 7 
+ 1 |@|p|_|_|_|?|_|
+ 2 |@|p|_|3|0| |_|
+ 3 |*|P|_|F|█|_|x|
+ 4 |@|p|?|■|_|X|_|
+
+█
+\u2588
+Full block (completely filled)
+System.out.println("\u2588");
+
+■
+\u25A0
+Black square
