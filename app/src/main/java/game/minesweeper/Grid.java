@@ -62,4 +62,6 @@ public class Grid {
     }
 
     public List<Cell> getAllCells() { return new ArrayList<>(cells.values()); }
+
+    public List<Coordinate> getAllCoordinates() { return new ArrayList<>(cells.keySet()); }
 }
