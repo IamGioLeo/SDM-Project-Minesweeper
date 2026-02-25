@@ -59,8 +59,10 @@ public class GridTest {
     void gridHasCorrectAmountOfCells(){
         Grid grid = new Grid(9,9);
 
+        int coordinateCount = grid.getAllCoordinates().size();
         int cellsCount = grid.getAllCells().size();
 
+        assertEquals(81, coordinateCount);
         assertEquals(81,cellsCount);
     }
 }
