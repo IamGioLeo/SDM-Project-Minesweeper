@@ -2,8 +2,7 @@ package game.minesweeper;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CellTest {
 
@@ -48,5 +47,18 @@ public class CellTest {
         assertFalse(cell.isFlagged());
     }
 
+    @Test
+    void newCellNeighborsMineCountIsZero(){
+        Cell cell = new Cell();
 
+        assertEquals(0, cell.neighborsMineCount());
+    }
+
+    @Test
+    void cellNeighborsMineCountPlaceCorrectly(){
+        Cell cell = new Cell();
+        cell.setNeighborsMineCount(6);
+
+        assertEquals(6, cell.neighborsMineCount());
+    }
 }

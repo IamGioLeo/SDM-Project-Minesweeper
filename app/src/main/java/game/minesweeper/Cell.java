@@ -5,6 +5,7 @@ public class Cell {
     private boolean revealed = false;
     private boolean hasMine = false;
     private boolean flagged = false;
+    private int neighborsMineCount = 0;
 
     public boolean isRevealed() {
         return revealed;
@@ -29,4 +30,8 @@ public class Cell {
     public void toggleFlag() {
         flagged = !flagged;
     }
+
+    public int neighborsMineCount() { return neighborsMineCount; }
+
+    public void setNeighborsMineCount(int neighborsMineCount) { this.neighborsMineCount = neighborsMineCount; }
 }
