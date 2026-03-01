@@ -53,4 +53,20 @@ public class GameTest {
         game.openCell(other);
         assertFalse(grid.getCell(other).isRevealed());
     }
+
+    @Test
+    void gameIsWonWhenAllSafeCellsAreRevealed() {
+        Grid grid = new Grid(1, 2);
+
+        Coordinate mine = new Coordinate(1,1);
+        Coordinate safe = new Coordinate(1,2);
+
+        grid.getCell(mine).placeMine();
+
+        Game game = new Game(grid);
+
+        game.openCell(safe);
+
+        assertEquals(GameState.WON, game.getState());
+    }
 }

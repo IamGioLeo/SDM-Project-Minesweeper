@@ -22,7 +22,17 @@ public class Game {
         }
 
         cell.reveal();
+        checkWinCondition();
 
+    }
+
+    private void checkWinCondition() {
+        for (Cell cell : grid.getAllCells()) {
+            if (!cell.hasMine() && !cell.isRevealed()) {
+                return;
+            }
+        }
+        gameState = GameState.WON;
     }
 
     public GameState getState() {
