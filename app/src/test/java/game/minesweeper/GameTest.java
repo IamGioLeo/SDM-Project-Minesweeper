@@ -3,6 +3,7 @@ package game.minesweeper;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class GameTest {
 
@@ -15,5 +16,16 @@ public class GameTest {
         Game game = new Game(grid);
         game.openCell(mine);
         assertEquals(GameState.LOST, game.getState());
+    }
+
+    @Test
+    public void openingSafeCellRevealsIt(){
+        Grid grid = new Grid(2,2);
+        Coordinate safe = new Coordinate(1,1);
+
+        Game game = new Game(grid);
+        game.openCell(safe);
+
+        assertTrue(grid.getCell(safe).isRevealed());
     }
 }
