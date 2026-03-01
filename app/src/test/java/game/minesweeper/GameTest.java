@@ -28,4 +28,15 @@ public class GameTest {
 
         assertTrue(grid.getCell(safe).isRevealed());
     }
+
+    @Test
+    public void openingSafeCellContinuesTheGame(){
+        Grid grid = new Grid(2,2);
+        Coordinate safe = new Coordinate(1,1);
+
+        Game game = new Game(grid);
+        game.openCell(safe);
+
+        assertEquals(GameState.RUNNING, game.getState());
+    }
 }
