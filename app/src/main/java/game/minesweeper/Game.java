@@ -10,6 +10,10 @@ public class Game {
     }
 
     public void openCell(Coordinate coordinate) {
+        if (gameState != GameState.RUNNING) {
+            return;
+        }
+
         Cell cell = grid.getCell(coordinate);
 
         if (cell.hasMine()) {

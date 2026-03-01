@@ -2,8 +2,7 @@ package game.minesweeper;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GameTest {
 
@@ -38,5 +37,20 @@ public class GameTest {
         game.openCell(safe);
 
         assertEquals(GameState.RUNNING, game.getState());
+    }
+
+    @Test
+    public void cannotOpenCellAfterGameIsLost(){
+        Grid grid = new Grid(2,2);
+        Coordinate mine = new Coordinate(1,1);
+
+        grid.getCell(mine).placeMine();
+
+        Game game = new Game(grid);
+        game.openCell(mine); //lose
+
+        Coordinate other = new Coordinate(1,2);
+        game.openCell(other);
+        assertFalse(grid.getCell(other).isRevealed());
     }
 }
