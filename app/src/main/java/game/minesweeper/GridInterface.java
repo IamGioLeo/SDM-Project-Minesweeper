@@ -9,6 +9,8 @@ public interface GridInterface<C extends CoordinateInterface> {
 
     List<Cell> getCellNeighbors(C coordinate);
 
+    List<C> getNeighborCoordinates(C coordinate);
+
     List<Cell> getAllCells();
 
     List<C> getAllCoordinates();

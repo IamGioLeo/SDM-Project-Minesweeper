@@ -29,6 +29,7 @@ public class Grid extends AbstractGrid2D {
         return neighbors;
     }
 
+    @Override
     public List<Coordinate> getNeighborCoordinates(Coordinate coordinate) {
 
         int row = coordinate.row();
