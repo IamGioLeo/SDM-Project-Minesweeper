@@ -16,4 +16,16 @@ public class GameControllerTest {
 
         assertTrue(grid.getCell(new Coordinate(1,1)).isRevealed());
     }
+
+    @Test
+    void flagCommandFlagsCell() {
+
+        Grid grid = new Grid(2,2);
+        Game game = new Game(grid);
+        GameController controller = new GameController(game);
+
+        controller.toggleFlag(1,1);
+
+        assertTrue(grid.getCell(new Coordinate(1,1)).isFlagged());
+    }
 }
