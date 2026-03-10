@@ -14,4 +14,8 @@ public class GameController {
     public void toggleFlag(int row, int column) {
         game.toggleFlag(new Coordinate(row, column));
     }
+
+    public GameState getGameState() {
+        return game.getState();
+    }
 }

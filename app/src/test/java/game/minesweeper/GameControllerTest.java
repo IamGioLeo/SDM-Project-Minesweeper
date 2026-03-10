@@ -28,4 +28,20 @@ public class GameControllerTest {
 
         assertTrue(grid.getCell(new Coordinate(1,1)).isFlagged());
     }
+
+    @Test
+    void openMineThroughControllerEndsGame() {
+
+        Grid grid = new Grid(2,2);
+        Game game = new Game(grid);
+        GameController controller = new GameController(game);
+        GridInitializer initializer = new GridInitializer(grid);
+        Coordinate mine = new Coordinate(1,1);
+
+        initializer.placeMine(mine);
+        controller.open(1,1);
+
+        assertEquals(GameState.LOST, controller.getGameState());
+    }
+
 }
