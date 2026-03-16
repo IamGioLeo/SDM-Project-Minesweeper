@@ -2,12 +2,19 @@ package game.minesweeper;
 
 public class Minesweeper {
 
-    public String getGreeting() {
-        return "Welcome to Minesweeper!! This is the entry point";
-    }
 
     public static void main(String[] args) {
-        System.out.println(new Minesweeper().getGreeting());
+
+        Grid grid = new Grid(8, 8);
+
+        GridInitializer initializer = new GridInitializer(grid);
+        initializer.initialize(10);
+
+        Game game = new Game(grid);
+        GameController controller = new GameController(game);
+
+        ConsoleUI ui = new ConsoleUI();
+        ui.start(controller, grid);
     }
 
 }
