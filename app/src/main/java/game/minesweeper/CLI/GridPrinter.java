@@ -8,36 +8,30 @@ public class GridPrinter {
 
     public static void print(GridOfSquares grid) {
 
-        String string = "   ";
-
+        System.out.print("  ");
         for (int i = 1; i <= grid.getNumberOfColumns(); i++) {
-            string += i + " ";
+            System.out.printf("%3d", i);
         }
 
-        System.out.println(string);
+        System.out.println();
 
         for (int row = 1; row <= grid.getNumberOfRows(); row++) {
-            System.out.print(row + "  ");
+            System.out.printf("%2d", row);
             for (int col = 1; col <= grid.getNumberOfColumns(); col++) {
 
                 Cell cell = grid.getCell(new Coordinate(row, col));
 
+                String display;
+
                 if (!cell.isRevealed()) {
-
-                    if (cell.isFlagged()) {
-                        System.out.print("F ");
-                    } else {
-                        System.out.print("\u2580 ");
-                    }
-
+                    display = cell.isFlagged() ? "F" : "\u2580";
                 } else if (cell.hasMine()) {
-
-                    System.out.print("* ");
-
+                    display = "*";
                 } else {
-
-                    System.out.print(cell.neighborsMineCount() + " ");
+                    display = String.valueOf(cell.neighborsMineCount());
                 }
+
+                System.out.printf("%3s", display);
             }
 
             System.out.println();
