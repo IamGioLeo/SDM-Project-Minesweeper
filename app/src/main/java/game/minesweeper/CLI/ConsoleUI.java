@@ -20,16 +20,21 @@ public class ConsoleUI {
             System.out.println("open(o) row col | flag(f) row col");
 
             String command = scanner.next().toLowerCase();
-            int row = scanner.nextInt();
-            int col = scanner.nextInt();
+
+            int row;
+            int col;
 
             switch (command) {
                 case "open", "o":
+                    row = scanner.nextInt();
+                    col = scanner.nextInt();
                     controller.open(row, col);
                     GridPrinter.print(grid);
                     break;
 
                 case "flag", "f":
+                    row = scanner.nextInt();
+                    col = scanner.nextInt();
                     controller.toggleFlag(row, col);
                     GridPrinter.print(grid);
                     break;
