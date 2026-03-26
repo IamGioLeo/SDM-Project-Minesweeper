@@ -1,4 +1,4 @@
-package game.minesweeper;
+package game.minesweeper.grid;
 
 import java.util.ArrayList;
 import java.util.HashMap;

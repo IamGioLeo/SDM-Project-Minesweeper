@@ -1,4 +1,4 @@
-package game.minesweeper;
+package game.minesweeper.grid;
 
 public class Cell {
 

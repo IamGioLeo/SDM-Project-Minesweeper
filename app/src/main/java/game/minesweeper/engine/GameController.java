@@ -1,4 +1,6 @@
-package game.minesweeper;
+package game.minesweeper.engine;
+
+import game.minesweeper.grid.Coordinate;
 
 public class GameController {
     private final Game game;

@@ -1,4 +1,4 @@
-package game.minesweeper;
+package game.minesweeper.engine;
 
 public enum GameState {
     RUNNING,

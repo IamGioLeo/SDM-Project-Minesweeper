@@ -1,35 +1,38 @@
 package game.minesweeper;
 
+import game.minesweeper.grid.Cell;
+import game.minesweeper.grid.Coordinate;
+import game.minesweeper.grid.GirdOfSquares;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class GridTest {
+public class GirdTest {
 
     @Test
     void newGridHasCorrectNumberOfRows() {
-        Grid grid = new Grid(9, 9);
+        GirdOfSquares grid = new GirdOfSquares(9, 9);
         int numberOfRows = grid.getNumberOfRows();
         assertEquals(9, numberOfRows);
     }
 
     @Test
     void newGridHasCorrectNumberOfColumns() {
-        Grid grid = new Grid(9, 9);
+        GirdOfSquares grid = new GirdOfSquares(9, 9);
         int numberOfColumns = grid.getNumberOfColumns();
         assertEquals(9, numberOfColumns);
     }
 
     @Test
     void girdCanGetCellWithInts() {
-        Grid grid = new Grid(9, 9);
+        GirdOfSquares grid = new GirdOfSquares(9, 9);
         Cell cell = grid.getCell(6, 7);
         assertNotNull(cell);
     }
 
     @Test
     void girdCanGetCellWithCoordinate() {
-        Grid grid = new Grid(9, 9);
+        GirdOfSquares grid = new GirdOfSquares(9, 9);
         Coordinate coordinate = new Coordinate(9,9);
         Cell cell = grid.getCell(coordinate);
         assertNotNull(cell);
@@ -37,14 +40,14 @@ public class GridTest {
 
     @Test
     void newGridDoesNotHaveCellInIncorrectPosition() {
-        Grid grid = new Grid(9, 9);
+        GirdOfSquares grid = new GirdOfSquares(9, 9);
         Cell cell = grid.getCell(67, 67);
         assertNull(cell);
     }
 
     @Test
     void gridCanFindCorrectAmountOfNeighbors(){
-        Grid grid = new Grid(9, 9);
+        GirdOfSquares grid = new GirdOfSquares(9, 9);
 
         int angleNeighborCount = grid.getCellNeighbors(1,1).size();
         int boarderNeighborCount = grid.getCellNeighbors(6,1).size();
@@ -57,7 +60,7 @@ public class GridTest {
 
     @Test
     void gridHasCorrectAmountOfCells(){
-        Grid grid = new Grid(9,9);
+        GirdOfSquares grid = new GirdOfSquares(9,9);
 
         int coordinateCount = grid.getAllCoordinates().size();
         int cellsCount = grid.getAllCells().size();

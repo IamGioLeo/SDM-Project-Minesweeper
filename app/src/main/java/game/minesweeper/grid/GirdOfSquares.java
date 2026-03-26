@@ -1,11 +1,11 @@
-package game.minesweeper;
+package game.minesweeper.grid;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Grid extends AbstractGrid2D {
+public class GirdOfSquares extends AbstractGrid2D {
 
-    public Grid(int numberOfRows, int numberOfColumns) {
+    public GirdOfSquares(int numberOfRows, int numberOfColumns) {
         super(numberOfRows, numberOfColumns);
     }
 

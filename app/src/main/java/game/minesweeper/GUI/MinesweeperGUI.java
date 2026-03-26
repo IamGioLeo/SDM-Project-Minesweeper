@@ -1,9 +1,9 @@
 package game.minesweeper.GUI;
 
-import game.minesweeper.Game;
-import game.minesweeper.GameController;
-import game.minesweeper.Grid;
-import game.minesweeper.GridInitializer;
+import game.minesweeper.engine.Game;
+import game.minesweeper.engine.GameController;
+import game.minesweeper.grid.GirdOfSquares;
+import game.minesweeper.engine.GridInitializer;
 
 public class MinesweeperGUI {
     public static void main(String[] args) {
@@ -12,7 +12,7 @@ public class MinesweeperGUI {
         int rows = 9;
         int mines = 10;
 
-        Grid grid = new Grid(rows, columns);
+        GirdOfSquares grid = new GirdOfSquares(rows, columns);
         new GridInitializer(grid).initialize(mines);
 
         Game game = new Game(grid);

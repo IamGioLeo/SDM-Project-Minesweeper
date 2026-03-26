@@ -1,5 +1,9 @@
-package game.minesweeper;
+package game.minesweeper.engine;
 
+
+import game.minesweeper.grid.Cell;
+import game.minesweeper.grid.Coordinate;
+import game.minesweeper.grid.GirdOfSquares;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -8,10 +12,10 @@ import java.util.Set;
 
 public class GridInitializer {
 
-    private final Grid grid;
+    private final GirdOfSquares grid;
     private Set<Coordinate> minesCoordinate = new HashSet<>();
 
-    public GridInitializer(Grid grid) {
+    public GridInitializer(GirdOfSquares grid) {
         this.grid = grid;
     }
 
@@ -42,7 +46,7 @@ public class GridInitializer {
         }
     }
 
-    public Grid getGrid() {
+    public GirdOfSquares getGrid() {
         return grid;
     }
 

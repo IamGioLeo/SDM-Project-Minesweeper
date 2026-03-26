@@ -1,10 +1,14 @@
-package game.minesweeper;
+package game.minesweeper.CLI;
+
+import game.minesweeper.engine.GameController;
+import game.minesweeper.engine.GameState;
+import game.minesweeper.grid.GirdOfSquares;
 
 import java.util.Scanner;
 
 public class ConsoleUI {
 
-    public void start(GameController controller, Grid grid) {
+    public void start(GameController controller, GirdOfSquares grid) {
 
         Scanner scanner = new Scanner(System.in);
 
