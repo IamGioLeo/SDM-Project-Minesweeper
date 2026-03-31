@@ -23,7 +23,20 @@ public class StartingMenuGUI {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
 
-        frame.add(difficultyButtonsPanel());
+        frame.setLayout(new GridBagLayout());
+
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 0;
+
+        frame.add(new JLabel("Welcome to Minesweeper"), c);
+
+        c.gridy = 1;
+        frame.add(new JLabel("Chose the difficulty mode"), c);
+
+        c.gridy = 2;
+        frame.add(difficultyButtonsPanel(), c);
 
         frame.pack();
         frame.setLocationRelativeTo(null);
@@ -33,20 +46,30 @@ public class StartingMenuGUI {
     private JPanel difficultyButtonsPanel() {
         JPanel difficultyButtonsPanel = new JPanel();
 
-        difficultyButtonsPanel.setLayout(new BoxLayout(difficultyButtonsPanel, BoxLayout.Y_AXIS));
+        difficultyButtonsPanel.setLayout(new GridBagLayout());
 
-        difficultyButtonsPanel.add(buildDifficultyButton("Easy", 9, 9, 10));
-        difficultyButtonsPanel.add(buildDifficultyButton("Medium", 16, 16, 40));
-        difficultyButtonsPanel.add(buildDifficultyButton("Hard", 16, 30, 99));
-        difficultyButtonsPanel.add(buildCustomizeDifficultyButton());
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 0;
+
+
+        difficultyButtonsPanel.add(buildDifficultyButton("Easy", 9, 9, 10), c);
+        c.gridy = 1;
+        difficultyButtonsPanel.add(buildDifficultyButton("Medium", 16, 16, 40), c);
+        c.gridy = 2;
+        difficultyButtonsPanel.add(buildDifficultyButton("Hard", 16, 30, 99), c);
+        c.gridy = 3;
+        difficultyButtonsPanel.add(buildCustomizeDifficultyButton(), c);
 
         return difficultyButtonsPanel;
 
     }
 
-    private JButton buildDifficultyButton(String difficultyLabel, int rows, int columns, int mines) {
-        JButton btn = new JButton(difficultyLabel);
+    private JButton buildDifficultyButton(String difficultyLabelString, int rows, int columns, int mines) {
+        JButton btn = new JButton();
 
+        btn.setLayout(new BoxLayout(btn, BoxLayout.Y_AXIS));
 
         btn.addMouseListener(new MouseAdapter() {
             @Override
@@ -54,6 +77,14 @@ public class StartingMenuGUI {
                 startGame(rows, columns, mines);
             }
         });
+
+        JLabel difficultyLabel = new JLabel(difficultyLabelString);
+        difficultyLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btn.add(difficultyLabel);
+
+        JLabel description = new JLabel(rows + " x " + columns + " grid, " + mines + " mines");
+        description.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btn.add(description);
 
         return btn;
     }
