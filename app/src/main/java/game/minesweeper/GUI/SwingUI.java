@@ -5,6 +5,7 @@ import game.minesweeper.engine.GameController;
 import game.minesweeper.engine.GameState;
 import game.minesweeper.engine.GridInitializer;
 import game.minesweeper.grid.Cell;
+import game.minesweeper.grid.Coordinate;
 import game.minesweeper.grid.GridOfSquares;
 
 import javax.swing.*;
@@ -210,8 +211,8 @@ public class SwingUI {
 
     private void restartGame() {
         GridOfSquares newGrid = new GridOfSquares(grid.getNumberOfRows(), grid.getNumberOfColumns());
-        new GridInitializer(newGrid).initialize(mineCount);
-        Game newGame = new Game(newGrid);
+        new GridInitializer<>(newGrid).initialize(mineCount);
+        Game<Coordinate> newGame = new Game<>(newGrid);
         GameController newController = new GameController(newGame);
         start(newController, newGrid, mineCount);
     }

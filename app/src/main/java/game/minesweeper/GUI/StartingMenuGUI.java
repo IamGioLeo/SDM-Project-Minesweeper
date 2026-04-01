@@ -3,6 +3,7 @@ package game.minesweeper.GUI;
 import game.minesweeper.engine.Game;
 import game.minesweeper.engine.GameController;
 import game.minesweeper.engine.GridInitializer;
+import game.minesweeper.grid.Coordinate;
 import game.minesweeper.grid.GridOfSquares;
 
 import javax.swing.*;
@@ -166,9 +167,9 @@ public class StartingMenuGUI {
         frame.dispose();
 
         GridOfSquares grid = new GridOfSquares(rows, columns);
-        new GridInitializer(grid).initialize(mines);
+        new GridInitializer<>(grid).initialize(mines);
 
-        Game game = new Game(grid);
+        Game<Coordinate> game = new Game<>(grid);
         GameController controller = new GameController(game);
 
         new SwingUI().start(controller, grid, mines);

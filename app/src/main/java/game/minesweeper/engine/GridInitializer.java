@@ -1,21 +1,19 @@
 package game.minesweeper.engine;
 
 
-import game.minesweeper.grid.Cell;
-import game.minesweeper.grid.Coordinate;
-import game.minesweeper.grid.GridOfSquares;
+import game.minesweeper.grid.*;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class GridInitializer {
+public class GridInitializer<C extends CoordinateInterface> {
 
-    private final GridOfSquares grid;
-    private Set<Coordinate> minesCoordinate = new HashSet<>();
+    private final AbstractGrid<C> grid;
+    private Set<C> minesCoordinate = new HashSet<>();
 
-    public GridInitializer(GridOfSquares grid) {
+    public GridInitializer(AbstractGrid<C> grid) {
         this.grid = grid;
     }
 
@@ -24,7 +22,7 @@ public class GridInitializer {
         placeMines();
     }
 
-    public void placeMine(Coordinate coordinate) {
+    public void placeMine(C coordinate) {
 
         Cell cell = grid.getCell(coordinate);
 
@@ -41,12 +39,12 @@ public class GridInitializer {
     }
 
     public void placeMines() {
-        for (Coordinate coordinate : minesCoordinate) {
+        for (C coordinate : minesCoordinate) {
             placeMine(coordinate);
         }
     }
 
-    public GridOfSquares getGrid() {
+    public AbstractGrid<C> getGrid() {
         return grid;
     }
 
@@ -54,14 +52,14 @@ public class GridInitializer {
         return minesCoordinate.size();
     }
 
-    public Set<Coordinate> getMinesCoordinate() {
+    public Set<C> getMinesCoordinate() {
         return minesCoordinate;
     }
 
-    public Set<Coordinate> generateRandomSetOfCoordinates(int mineCount) {
+    public Set<C> generateRandomSetOfCoordinates(int mineCount) {
 
-        Set<Coordinate> randomSetOfCoordinates = new HashSet<>();
-        List<Coordinate> cellCoordinates = grid.getAllCoordinates();
+        Set<C> randomSetOfCoordinates = new HashSet<>();
+        List<C> cellCoordinates = grid.getAllCoordinates();
         Collections.shuffle(cellCoordinates);
 
         for (int i = 0; i < mineCount; i++) {
