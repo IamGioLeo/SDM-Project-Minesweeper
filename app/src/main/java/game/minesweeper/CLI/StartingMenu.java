@@ -59,7 +59,7 @@ public class StartingMenu {
         }
 
         GridOfSquares grid = new GridOfSquares(rows, columns);
-        GridInitializer<Coordinate, GridOfSquares> gridInitializer = new GridInitializer<>(grid);
+        GridInitializer<Coordinate> gridInitializer = new GridInitializer<>(grid);
         gridInitializer.initialize(mines);
 
         return grid;

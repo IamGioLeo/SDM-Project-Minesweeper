@@ -8,12 +8,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class GridInitializer<C extends CoordinateInterface, G extends AbstractGrid<C>> {
+public class GridInitializer<C extends CoordinateInterface> {
 
-    private final G grid;
+    private final AbstractGrid<C> grid;
     private Set<C> minesCoordinate = new HashSet<>();
 
-    public GridInitializer(G grid) {
+    public GridInitializer(AbstractGrid<C> grid) {
         this.grid = grid;
     }
 
@@ -44,7 +44,7 @@ public class GridInitializer<C extends CoordinateInterface, G extends AbstractGr
         }
     }
 
-    public G getGrid() {
+    public AbstractGrid<C> getGrid() {
         return grid;
     }
 
