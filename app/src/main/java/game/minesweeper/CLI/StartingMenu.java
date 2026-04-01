@@ -1,6 +1,7 @@
 package game.minesweeper.CLI;
 
 import game.minesweeper.engine.GridInitializer;
+import game.minesweeper.grid.Coordinate;
 import game.minesweeper.grid.GridOfSquares;
 
 import java.util.Scanner;
@@ -10,8 +11,6 @@ public class StartingMenu {
     public static GridOfSquares startMenu() {
 
         Scanner scanner = new Scanner(System.in);
-
-
 
         int columns = 9;
         int rows = 9;
@@ -60,7 +59,7 @@ public class StartingMenu {
         }
 
         GridOfSquares grid = new GridOfSquares(rows, columns);
-        GridInitializer gridInitializer = new GridInitializer(grid);
+        GridInitializer<Coordinate, GridOfSquares> gridInitializer = new GridInitializer<>(grid);
         gridInitializer.initialize(mines);
 
         return grid;
