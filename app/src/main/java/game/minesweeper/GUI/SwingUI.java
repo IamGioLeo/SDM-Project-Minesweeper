@@ -9,6 +9,7 @@ import game.minesweeper.grid.Coordinate;
 import game.minesweeper.grid.GridOfSquares;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -21,6 +22,9 @@ public class SwingUI {
     private GameState gameState;
     private JFrame frame;
     private int mineCount;
+    private JLabel clock;
+    private JLabel unflaggedCounter;
+    private int flagCount;
 
 
     public void start(GameController controller, GridOfSquares grid, int mineCount) {
@@ -28,16 +32,20 @@ public class SwingUI {
         this.controller = controller;
         this.gameState = controller.getGameState();
         this.mineCount = mineCount;
+        this.flagCount = 0;
         SwingUtilities.invokeLater(this::buildUI);
     }
 
     private void buildUI() {
         frame = new JFrame("Minesweeper");
+        frame.setLayout(new BorderLayout());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        frame.add(buildHeader(), BorderLayout.NORTH);
 
         JPanel gridPanel = buildGrid();
         JScrollPane scrollPane = new JScrollPane(gridPanel);
-        frame.add(scrollPane);
+        frame.add(scrollPane, BorderLayout.CENTER);
         frame.pack();
 
         Rectangle usableScreen = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
@@ -110,6 +118,9 @@ public class SwingUI {
                     Cell cell = grid.getCell(row, column);
 
                     if (cell.isRevealed()) return;
+
+                    if (cell.isFlagged()) flagCount--;
+                    else flagCount++;
 
                     controller.toggleFlag(row, column);
                     refreshBoard();
@@ -205,7 +216,29 @@ public class SwingUI {
             }
         }
 
+        unflaggedCounter.setText("Unflagged Mines: " + (mineCount - flagCount));
 
+
+    }
+
+
+    private JPanel buildHeader() {
+
+        JPanel header = new JPanel(new BorderLayout(5, 5));
+
+        header.setBorder(new EmptyBorder(10,10,10,10));
+
+        clock = new JLabel("Clock");
+        clock.setBackground(new Color(0, 0, 0));
+        clock.setOpaque(true);
+        header.add(clock, BorderLayout.CENTER);
+
+        unflaggedCounter = new JLabel("Unflagged Mines: " + (mineCount - flagCount));
+        unflaggedCounter.setBackground(new Color(0, 255, 255));
+        unflaggedCounter.setOpaque(true);
+        header.add(unflaggedCounter, BorderLayout.EAST);
+
+        return header;
     }
 
 
