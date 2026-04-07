@@ -56,7 +56,10 @@ public class FooterGUI extends JPanel {
         gbc.gridy = 3;
         gbc.fill = GridBagConstraints.NONE;
         gbc.anchor = GridBagConstraints.EAST;
-        closeButton.addActionListener(e -> rules.dispose());
+        closeButton.addActionListener(e -> {
+            rules.dispose();
+            rulesShown = false;
+        });
 
         rules.add(closeButton, gbc);
 
@@ -94,7 +97,10 @@ public class FooterGUI extends JPanel {
         gbc.gridy = 3;
         gbc.fill = GridBagConstraints.NONE;
         gbc.anchor = GridBagConstraints.EAST;
-        closeButton.addActionListener(e -> commands.dispose());
+        closeButton.addActionListener(e -> {
+            commands.dispose();
+            commandsShown = false;
+        });
         commands.add(closeButton, gbc);
 
         commands.pack();
