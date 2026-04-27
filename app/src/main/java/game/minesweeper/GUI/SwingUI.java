@@ -4,7 +4,6 @@ import game.minesweeper.engine.Game;
 import game.minesweeper.engine.GameController;
 import game.minesweeper.engine.GameState;
 import game.minesweeper.engine.GridInitializer;
-import game.minesweeper.grid.Cell;
 import game.minesweeper.grid.Coordinate;
 import game.minesweeper.grid.GridOfSquares;
 
@@ -13,6 +12,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import game.minesweeper.engine.CellView;
 
 public class SwingUI {
 
@@ -108,9 +109,9 @@ public class SwingUI {
 
                     timer.start();
 
-                    Cell cell = grid.getCell(row, column);
+                    CellView cell = controller.getCellView(row, column);
 
-                    if (cell.isFlagged()) return;
+                    if (cell.flagged()) return;
 
                     controller.open(row, column);
                     refreshBoard();
@@ -120,11 +121,11 @@ public class SwingUI {
 
                     timer.start();
 
-                    Cell cell = grid.getCell(row, column);
+                    CellView cell = controller.getCellView(row, column);
 
-                    if (cell.isRevealed()) return;
+                    if (cell.revealed()) return;
 
-                    if (cell.isFlagged()) flagCount--;
+                    if (cell.flagged()) flagCount--;
                     else flagCount++;
 
                     controller.toggleFlag(row, column);
@@ -202,31 +203,36 @@ public class SwingUI {
         for (int r = 1; r <= rows; r++) {
             for (int c = 1; c <= cols; c++) {
 
-                Cell cell = grid.getCell(r, c);
+                CellView cell = controller.getCellView(r, c);
+                JButton button = buttons[r][c];
 
-                if (cell.isRevealed()) {
-                    if (cell.hasMine()) {
-                        buttons[r][c].setText("*");
-                        buttons[r][c].setBackground(Color.RED);
+                if (cell.revealed()) {
+
+                    if (cell.mine()) {
+                        button.setText("*");
+                        button.setBackground(Color.RED);
+
                     } else {
-                        buttons[r][c].setBackground(Color.GREEN);
-                        int count = cell.neighborsMineCount();
-                        if (count == 0) {
-                            buttons[r][c].setText("");
+                        button.setBackground(Color.GREEN);
+
+                        if (cell.neighborMineCount() == 0) {
+                            button.setText("");
                         } else {
-                            buttons[r][c].setText(String.valueOf(count));
+                            button.setText(String.valueOf(cell.neighborMineCount()));
                         }
                     }
+
                 } else {
-                    if (cell.isFlagged()) buttons[r][c].setText("⚑");
-                    if (!cell.isFlagged()) buttons[r][c].setText("");
+
+                    button.setBackground(null);
+                    button.setText(cell.flagged() ? "⚑" : "");
                 }
             }
         }
 
-        unflaggedCounter.setText("Unflagged Mines: " + (mineCount - flagCount));
-
-
+        unflaggedCounter.setText(
+                "Unflagged Mines: " + (mineCount - flagCount)
+        );
     }
 
 
