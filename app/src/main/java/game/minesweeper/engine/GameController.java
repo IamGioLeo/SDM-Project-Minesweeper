@@ -1,5 +1,5 @@
 package game.minesweeper.engine;
-
+import game.minesweeper.grid.Cell;
 import game.minesweeper.grid.Coordinate;
 
 public class GameController {
@@ -20,4 +20,21 @@ public class GameController {
     public GameState getGameState() {
         return game.getState();
     }
+
+    public CellView getCellView(int row, int column) {
+
+        Coordinate coordinate = new Coordinate(row, column);
+        Cell cell = game.getGrid().getCell(coordinate);
+
+        if (cell == null) return null;
+
+        return new CellView(
+                cell.isRevealed(),
+                cell.isFlagged(),
+                cell.hasMine(),
+                cell.neighborsMineCount()
+        );
+    }
+
+
 }
