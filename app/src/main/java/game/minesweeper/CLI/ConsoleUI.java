@@ -12,7 +12,7 @@ public class ConsoleUI {
 
         Scanner scanner = new Scanner(System.in);
 
-        GridPrinter.print(grid);
+        GridPrinter.print(controller, grid);
 
         while (controller.getGameState() == GameState.RUNNING) {
 
@@ -29,14 +29,14 @@ public class ConsoleUI {
                     row = scanner.nextInt();
                     col = scanner.nextInt();
                     controller.open(row, col);
-                    GridPrinter.print(grid);
+                    GridPrinter.print(controller, grid);
                     break;
 
                 case "flag", "f":
                     row = scanner.nextInt();
                     col = scanner.nextInt();
                     controller.toggleFlag(row, col);
-                    GridPrinter.print(grid);
+                    GridPrinter.print(controller, grid);
                     break;
 
                 default:
