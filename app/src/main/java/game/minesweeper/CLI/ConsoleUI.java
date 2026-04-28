@@ -1,5 +1,6 @@
 package game.minesweeper.CLI;
 
+import game.minesweeper.engine.CommandResult;
 import game.minesweeper.engine.GameController;
 import game.minesweeper.engine.GameState;
 import game.minesweeper.grid.GridOfSquares;
@@ -25,19 +26,25 @@ public class ConsoleUI {
             int col;
 
             switch (command) {
-                case "open", "o":
+                case "open", "o": {
                     row = scanner.nextInt();
                     col = scanner.nextInt();
-                    controller.open(row, col);
-                    GridPrinter.print(controller, grid);
+                    CommandResult result = controller.open(row, col);
+                    if (result.boardChanged()) {
+                        GridPrinter.print(controller, grid);
+                    }
                     break;
+                }
 
-                case "flag", "f":
+                case "flag", "f": {
                     row = scanner.nextInt();
                     col = scanner.nextInt();
-                    controller.toggleFlag(row, col);
-                    GridPrinter.print(controller, grid);
+                    CommandResult result = controller.toggleFlag(row, col);
+                    if (result.boardChanged()) {
+                        GridPrinter.print(controller, grid);
+                    }
                     break;
+                }
 
                 default:
                     System.out.println("Invalid command");

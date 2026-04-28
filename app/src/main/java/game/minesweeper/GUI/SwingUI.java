@@ -1,9 +1,6 @@
 package game.minesweeper.GUI;
 
-import game.minesweeper.engine.Game;
-import game.minesweeper.engine.GameController;
-import game.minesweeper.engine.GameState;
-import game.minesweeper.engine.GridInitializer;
+import game.minesweeper.engine.*;
 import game.minesweeper.grid.Coordinate;
 import game.minesweeper.grid.GridOfSquares;
 
@@ -12,8 +9,6 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-import game.minesweeper.engine.CellView;
 
 public class SwingUI {
 
@@ -113,9 +108,13 @@ public class SwingUI {
 
                     if (cell.flagged()) return;
 
-                    controller.open(row, column);
-                    refreshBoard();
-                    checkEndgame();
+                    CommandResult result = controller.open(row, column);
+
+                    if(result.boardChanged()) {
+                        refreshBoard();
+                    }
+
+                    handleEndgame(result.state());
 
                 } else if (SwingUtilities.isRightMouseButton(e)) {
 
@@ -128,8 +127,11 @@ public class SwingUI {
                     if (cell.flagged()) flagCount--;
                     else flagCount++;
 
-                    controller.toggleFlag(row, column);
-                    refreshBoard();
+                    CommandResult result = controller.toggleFlag(row, column);
+
+                    if(result.boardChanged()) {
+                        refreshBoard();
+                    }
 
                 }
             }
@@ -139,16 +141,22 @@ public class SwingUI {
     }
 
 
-    private void checkEndgame() {
+    private void handleEndgame(GameState state) {
 
-        gameState = controller.getGameState();
+        if(state == GameState.RUNNING) return;
 
-        if (gameState == GameState.RUNNING) return;
+        gameState = state;
 
-        if (gameState == GameState.WON) {
-            showEndgameDialog("YOU WON!", "Congratulations, all mines cleared!");
+        if(state == GameState.WON) {
+            showEndgameDialog(
+                    "YOU WON!",
+                    "Congratulations, all mines cleared!"
+            );
         } else {
-            showEndgameDialog("GAME OVER", "You hit a mine. Better luck next time!");
+            showEndgameDialog(
+                    "GAME OVER",
+                    "You hit a mine. Better luck next time!"
+            );
         }
     }
 
