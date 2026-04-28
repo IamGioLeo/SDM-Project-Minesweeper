@@ -9,12 +9,24 @@ public class GameController {
         this.game = game;
     }
 
-    public void open(int row, int column) {
+    public CommandResult open(int row, int column) {
+        CellView before = getCellView(row, column);
         game.openCell(new Coordinate(row, column));
+        CellView after = getCellView(row, column);
+
+        boolean boardChanged = !before.equals(after);
+
+        return new CommandResult(boardChanged, game.getState());
     }
 
-    public void toggleFlag(int row, int column) {
+    public CommandResult toggleFlag(int row, int column) {
+        CellView before = getCellView(row, column);
         game.toggleFlag(new Coordinate(row, column));
+        CellView after = getCellView(row, column);
+
+        boolean boardChanged = !before.equals(after);
+
+        return new CommandResult(boardChanged, game.getState());
     }
 
     public GameState getGameState() {
