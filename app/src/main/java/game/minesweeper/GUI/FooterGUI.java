@@ -41,14 +41,15 @@ public class FooterGUI extends JPanel {
         gbc.gridy = 0;
         rules.add(rulesLabel, gbc);
 
-        JLabel cellsLabel = new JLabel("Cells can be either hidden or open. You can open one by left-clicking on it.\n\r" +
-                "A closed cell can hide a mine; opening a cell with a mine will make you lose.\n\r" +
-                "Otherwise a number is shown, indicating how many mines are adjacent to that cell.");
+        JLabel cellsLabel = new JLabel("<html>Cells can be either hidden or open.<br>" +
+                "A closed cell can hide a mine or a number.<br> " +
+                "Opening a cell with a mine will make you lose.<br>" +
+                "The number indicates how many mines are adjacent to that cell.</html>");
         gbc.gridy = 1;
         rules.add(cellsLabel, gbc);
 
-        JLabel flagsLabel = new JLabel("You can place or remove a flag by right-clicking on a cell.\n\r" +
-                "A cell with a flag on it cannot be opened.");
+        JLabel flagsLabel = new JLabel("<html>You can place or remove a flag by right-clicking on a cell.<br>" +
+                "A cell with a flag on it cannot be opened.</html>");
         gbc.gridy = 2;
         rules.add(flagsLabel, gbc);
 
@@ -85,7 +86,7 @@ public class FooterGUI extends JPanel {
         gbc.gridy = 0;
         commands.add(commandsLabel, gbc);
 
-        JLabel leftClick = new JLabel("Left-click on a hidden cell to open it, unless it has a flag.");
+        JLabel leftClick = new JLabel("Left-click on a hidden cell to open it, unless it's flagged.");
         gbc.gridy = 1;
         commands.add(leftClick, gbc);
 
