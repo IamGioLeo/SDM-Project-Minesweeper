@@ -5,8 +5,8 @@ import java.awt.*;
 
 public class FooterGUI extends JPanel {
 
-    private boolean rulesShown =  false;
-    private boolean commandsShown =  false;
+    private JWindow rules = null;
+    private JWindow commands = null;
 
     public FooterGUI() {
 
@@ -26,10 +26,18 @@ public class FooterGUI extends JPanel {
 
     private void showRules() {
 
-        if (rulesShown) return;
-        else rulesShown = true;
+        if (rules != null) {
+            rules.dispose();
+            rules = null;
+            return;
+        }
 
-        JWindow rules = new JWindow();
+        if (commands != null) {
+            commands.dispose();
+            commands = null;
+        }
+
+        rules = new JWindow();
         rules.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -59,7 +67,7 @@ public class FooterGUI extends JPanel {
         gbc.anchor = GridBagConstraints.EAST;
         closeButton.addActionListener(e -> {
             rules.dispose();
-            rulesShown = false;
+            rules = null;
         });
 
         rules.add(closeButton, gbc);
@@ -71,10 +79,18 @@ public class FooterGUI extends JPanel {
 
     private void showCommands() {
 
-        if  (commandsShown) return;
-        else commandsShown = true;
+        if (commands != null) {
+            commands.dispose();
+            commands = null;
+            return;
+        }
 
-        JWindow commands = new JWindow();
+        if (rules != null) {
+            rules.dispose();
+            rules = null;
+        }
+
+        commands = new JWindow();
         commands.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -100,7 +116,7 @@ public class FooterGUI extends JPanel {
         gbc.anchor = GridBagConstraints.EAST;
         closeButton.addActionListener(e -> {
             commands.dispose();
-            commandsShown = false;
+            commands = null;
         });
         commands.add(closeButton, gbc);
 
