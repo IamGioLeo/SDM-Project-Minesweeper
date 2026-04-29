@@ -1,5 +1,5 @@
 package game.minesweeper.engine;
-
+import game.minesweeper.grid.Cell;
 import game.minesweeper.grid.Coordinate;
 
 public class GameController {
@@ -9,15 +9,44 @@ public class GameController {
         this.game = game;
     }
 
-    public void open(int row, int column) {
+    public CommandResult open(int row, int column) {
+        CellView before = getCellView(row, column);
         game.openCell(new Coordinate(row, column));
+        CellView after = getCellView(row, column);
+
+        boolean boardChanged = !before.equals(after);
+
+        return new CommandResult(boardChanged, game.getState());
     }
 
-    public void toggleFlag(int row, int column) {
+    public CommandResult toggleFlag(int row, int column) {
+        CellView before = getCellView(row, column);
         game.toggleFlag(new Coordinate(row, column));
+        CellView after = getCellView(row, column);
+
+        boolean boardChanged = !before.equals(after);
+
+        return new CommandResult(boardChanged, game.getState());
     }
 
     public GameState getGameState() {
         return game.getState();
     }
+
+    public CellView getCellView(int row, int column) {
+
+        Coordinate coordinate = new Coordinate(row, column);
+        Cell cell = game.getGrid().getCell(coordinate);
+
+        if (cell == null) return null;
+
+        return new CellView(
+                cell.isRevealed(),
+                cell.isFlagged(),
+                cell.hasMine(),
+                cell.neighborsMineCount()
+        );
+    }
+
+
 }

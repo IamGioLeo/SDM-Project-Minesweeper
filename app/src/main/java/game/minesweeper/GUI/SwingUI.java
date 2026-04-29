@@ -1,10 +1,6 @@
 package game.minesweeper.GUI;
 
-import game.minesweeper.engine.Game;
-import game.minesweeper.engine.GameController;
-import game.minesweeper.engine.GameState;
-import game.minesweeper.engine.GridInitializer;
-import game.minesweeper.grid.Cell;
+import game.minesweeper.engine.*;
 import game.minesweeper.grid.Coordinate;
 import game.minesweeper.grid.GridOfSquares;
 
@@ -108,27 +104,34 @@ public class SwingUI {
 
                     timer.start();
 
-                    Cell cell = grid.getCell(row, column);
+                    CellView cell = controller.getCellView(row, column);
 
-                    if (cell.isFlagged()) return;
+                    if (cell.flagged()) return;
 
-                    controller.open(row, column);
-                    refreshBoard();
-                    checkEndgame();
+                    CommandResult result = controller.open(row, column);
+
+                    if(result.boardChanged()) {
+                        refreshBoard();
+                    }
+
+                    handleEndgame(result.state());
 
                 } else if (SwingUtilities.isRightMouseButton(e)) {
 
                     timer.start();
 
-                    Cell cell = grid.getCell(row, column);
+                    CellView cell = controller.getCellView(row, column);
 
-                    if (cell.isRevealed()) return;
+                    if (cell.revealed()) return;
 
-                    if (cell.isFlagged()) flagCount--;
+                    if (cell.flagged()) flagCount--;
                     else flagCount++;
 
-                    controller.toggleFlag(row, column);
-                    refreshBoard();
+                    CommandResult result = controller.toggleFlag(row, column);
+
+                    if(result.boardChanged()) {
+                        refreshBoard();
+                    }
 
                 }
             }
@@ -138,16 +141,22 @@ public class SwingUI {
     }
 
 
-    private void checkEndgame() {
+    private void handleEndgame(GameState state) {
 
-        gameState = controller.getGameState();
+        if(state == GameState.RUNNING) return;
 
-        if (gameState == GameState.RUNNING) return;
+        gameState = state;
 
-        if (gameState == GameState.WON) {
-            showEndgameDialog("YOU WON!", "Congratulations, all mines cleared!");
+        if(state == GameState.WON) {
+            showEndgameDialog(
+                    "YOU WON!",
+                    "Congratulations, all mines cleared!"
+            );
         } else {
-            showEndgameDialog("GAME OVER", "You hit a mine. Better luck next time!");
+            showEndgameDialog(
+                    "GAME OVER",
+                    "You hit a mine. Better luck next time!"
+            );
         }
     }
 
@@ -202,31 +211,36 @@ public class SwingUI {
         for (int r = 1; r <= rows; r++) {
             for (int c = 1; c <= cols; c++) {
 
-                Cell cell = grid.getCell(r, c);
+                CellView cell = controller.getCellView(r, c);
+                JButton button = buttons[r][c];
 
-                if (cell.isRevealed()) {
-                    if (cell.hasMine()) {
-                        buttons[r][c].setText("*");
-                        buttons[r][c].setBackground(Color.RED);
+                if (cell.revealed()) {
+
+                    if (cell.mine()) {
+                        button.setText("*");
+                        button.setBackground(Color.RED);
+
                     } else {
-                        buttons[r][c].setBackground(Color.GREEN);
-                        int count = cell.neighborsMineCount();
-                        if (count == 0) {
-                            buttons[r][c].setText("");
+                        button.setBackground(Color.GREEN);
+
+                        if (cell.neighborMineCount() == 0) {
+                            button.setText("");
                         } else {
-                            buttons[r][c].setText(String.valueOf(count));
+                            button.setText(String.valueOf(cell.neighborMineCount()));
                         }
                     }
+
                 } else {
-                    if (cell.isFlagged()) buttons[r][c].setText("⚑");
-                    if (!cell.isFlagged()) buttons[r][c].setText("");
+
+                    button.setBackground(null);
+                    button.setText(cell.flagged() ? "⚑" : "");
                 }
             }
         }
 
-        unflaggedCounter.setText("Unflagged Mines: " + (mineCount - flagCount));
-
-
+        unflaggedCounter.setText(
+                "Unflagged Mines: " + (mineCount - flagCount)
+        );
     }
 
 

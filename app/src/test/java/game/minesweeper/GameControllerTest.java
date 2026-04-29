@@ -1,9 +1,6 @@
 package game.minesweeper;
 
-import game.minesweeper.engine.Game;
-import game.minesweeper.engine.GameController;
-import game.minesweeper.engine.GameState;
-import game.minesweeper.engine.GridInitializer;
+import game.minesweeper.engine.*;
 import game.minesweeper.grid.Coordinate;
 import game.minesweeper.grid.GridOfSquares;
 import org.junit.jupiter.api.Test;
@@ -48,6 +45,16 @@ public class GameControllerTest {
         controller.open(1,1);
 
         assertEquals(GameState.LOST, controller.getGameState());
+    }
+
+    @Test
+    void openOperationReturnsBoardChanged() {
+        GridOfSquares grid = new GridOfSquares(2,2);
+        GameController controller = new GameController(new Game<>(grid));
+
+        CommandResult result = controller.open(1,1);
+
+        assertTrue(result.boardChanged());
     }
 
 }

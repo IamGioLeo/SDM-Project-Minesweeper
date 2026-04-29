@@ -3,10 +3,12 @@ package game.minesweeper.CLI;
 import game.minesweeper.grid.Cell;
 import game.minesweeper.grid.Coordinate;
 import game.minesweeper.grid.GridOfSquares;
+import game.minesweeper.engine.CellView;
+import game.minesweeper.engine.GameController;
 
 public class GridPrinter {
 
-    public static void print(GridOfSquares grid) {
+    public static void print(GameController controller, GridOfSquares grid) {
 
         System.out.print("  ");
         for (int i = 1; i <= grid.getNumberOfColumns(); i++) {
@@ -19,16 +21,16 @@ public class GridPrinter {
             System.out.printf("%2d", row);
             for (int col = 1; col <= grid.getNumberOfColumns(); col++) {
 
-                Cell cell = grid.getCell(new Coordinate(row, col));
+                CellView cell = controller.getCellView(row, col);
 
                 String display;
 
-                if (!cell.isRevealed()) {
-                    display = cell.isFlagged() ? "F" : "\u2580";
-                } else if (cell.hasMine()) {
+                if (!cell.revealed()) {
+                    display = cell.flagged() ? "F" : "\u2580";
+                } else if (cell.mine()) {
                     display = "*";
                 } else {
-                    display = String.valueOf(cell.neighborsMineCount());
+                    display = String.valueOf(cell.neighborMineCount());
                 }
 
                 System.out.printf("%3s", display);

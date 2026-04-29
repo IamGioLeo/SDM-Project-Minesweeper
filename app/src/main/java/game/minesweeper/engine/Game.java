@@ -71,4 +71,8 @@ public class Game<C extends CoordinateInterface> {
     public GameState getState() {
         return gameState;
     }
+
+    public AbstractGrid<C> getGrid() {
+        return grid;
+    }
 }
