@@ -40,7 +40,7 @@ public class StartingMenuGUI {
         frame.add(difficultyButtonsPanel(), c);
 
         c.gridy = 3;
-        frame.add(new FooterGUI(), c);
+        frame.add(new FooterGUI(frame), c);
 
         frame.pack();
         frame.setLocationRelativeTo(null);

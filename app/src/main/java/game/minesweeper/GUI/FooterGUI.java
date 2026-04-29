@@ -5,10 +5,13 @@ import java.awt.*;
 
 public class FooterGUI extends JPanel {
 
+    private final JFrame owner;
     private JWindow rules = null;
     private JWindow commands = null;
 
-    public FooterGUI() {
+    public FooterGUI(JFrame owner) {
+
+        this.owner = owner;
 
         setLayout(new BorderLayout());
 
@@ -37,7 +40,7 @@ public class FooterGUI extends JPanel {
             commands = null;
         }
 
-        rules = new JWindow();
+        rules = new JWindow(owner);
         rules.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -90,7 +93,7 @@ public class FooterGUI extends JPanel {
             rules = null;
         }
 
-        commands = new JWindow();
+        commands = new JWindow(owner);
         commands.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
