@@ -179,7 +179,6 @@ public class SwingUI {
         playAgain.setAlignmentX(Component.CENTER_ALIGNMENT);
         playAgain.addActionListener(e -> {
             dialog.dispose();
-            frame.dispose();
             restartGame();
         });
 
@@ -250,7 +249,11 @@ public class SwingUI {
 
         header.setBorder(new EmptyBorder(10,10,10,10));
 
-        header.add(timer, BorderLayout.CENTER);
+        header.add(timer, BorderLayout.WEST);
+
+        JButton resetButton = new JButton("↻");
+        resetButton.addActionListener(e -> {restartGame();});
+        header.add(resetButton, BorderLayout.CENTER);
 
         unflaggedCounter = new JLabel("Unflagged Mines: " + (mineCount - flagCount));
         unflaggedCounter.setBackground(new Color(0, 255, 255));
@@ -262,10 +265,17 @@ public class SwingUI {
 
 
     private void restartGame() {
+
+        flagCount = 0;
+        timer.reset();
+        gameState = GameState.RUNNING;
+
         GridOfSquares newGrid = new GridOfSquares(grid.getNumberOfRows(), grid.getNumberOfColumns());
         new GridInitializer<>(newGrid).initialize(mineCount);
         Game<Coordinate> newGame = new Game<>(newGrid);
-        GameController newController = new GameController(newGame);
-        start(newController, newGrid, mineCount);
+        controller = new GameController(newGame);
+        grid = newGrid;
+
+        refreshBoard();
     }
 }
