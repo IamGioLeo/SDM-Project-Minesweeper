@@ -36,7 +36,7 @@ public class TimerGUI extends JLabel {
     public void reset() {
         timer.stop();
         seconds = 0;
-        setText("000");
+        setText("0000");
     }
 
     public int getSeconds() {
