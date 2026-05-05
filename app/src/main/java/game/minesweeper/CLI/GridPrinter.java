@@ -1,7 +1,5 @@
 package game.minesweeper.CLI;
 
-import game.minesweeper.grid.Cell;
-import game.minesweeper.grid.Coordinate;
 import game.minesweeper.grid.GridOfSquares;
 import game.minesweeper.engine.CellView;
 import game.minesweeper.engine.GameController;
