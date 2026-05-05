@@ -15,7 +15,7 @@ public class GridInitializerTest {
     @Test
     void properlyPlacedMine() {
         GridOfSquares grid = new GridOfSquares(9, 9);
-        GridInitializer gridInitializer = new GridInitializer(grid);
+        GridInitializer<Coordinate> gridInitializer = new GridInitializer<>(grid);
         Coordinate coordinate = new Coordinate(6, 7);
         Cell cell = grid.getCell(coordinate);
 
@@ -29,7 +29,7 @@ public class GridInitializerTest {
     void properlyPlacedMines() {
 
         GridOfSquares grid = new GridOfSquares(9, 9);
-        GridInitializer gridInitializer = new GridInitializer(grid);
+        GridInitializer<Coordinate> gridInitializer = new GridInitializer<>(grid);
         int mineCount = 0;
 
         gridInitializer.initialize(10);
@@ -51,7 +51,7 @@ public class GridInitializerTest {
     @Test
     void correctNeighborMineCountInCell() {
         GridOfSquares grid = new GridOfSquares(9, 9);
-        GridInitializer initializer = new GridInitializer(grid);
+        GridInitializer<Coordinate> initializer = new GridInitializer<>(grid);
         Coordinate c1 = new Coordinate(6, 6),
                 c2 = new Coordinate(6, 7),
                 c3 = new Coordinate(6, 8),

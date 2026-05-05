@@ -12,7 +12,7 @@ public class GameControllerTest {
     void openCommandRevealsCell() {
 
         GridOfSquares grid = new GridOfSquares(2,2);
-        Game game = new Game(grid);
+        Game<Coordinate> game = new Game<>(grid);
         GameController controller = new GameController(game);
 
         controller.open(1,1);
@@ -24,7 +24,7 @@ public class GameControllerTest {
     void flagCommandFlagsCell() {
 
         GridOfSquares grid = new GridOfSquares(2,2);
-        Game game = new Game(grid);
+        Game<Coordinate> game = new Game<>(grid);
         GameController controller = new GameController(game);
 
         controller.toggleFlag(1,1);
@@ -36,9 +36,9 @@ public class GameControllerTest {
     void openMineThroughControllerEndsGame() {
 
         GridOfSquares grid = new GridOfSquares(2,2);
-        Game game = new Game(grid);
+        Game<Coordinate> game = new Game<>(grid);
         GameController controller = new GameController(game);
-        GridInitializer initializer = new GridInitializer(grid);
+        GridInitializer<Coordinate> initializer = new GridInitializer<>(grid);
         Coordinate mine = new Coordinate(1,1);
 
         initializer.placeMine(mine);

@@ -15,8 +15,8 @@ public class GameTest {
     @Test
     public void openingAMineEndsTheGame() {
         GridOfSquares grid = new GridOfSquares(2,2);
-        Game game = new Game(grid);
-        GridInitializer initializer = new GridInitializer(grid);
+        Game<Coordinate> game = new Game<>(grid);
+        GridInitializer<Coordinate> initializer = new GridInitializer<>(grid);
         Coordinate mine = new Coordinate(1,1);
 
         initializer.placeMine(mine);
@@ -28,7 +28,7 @@ public class GameTest {
     @Test
     public void openingSafeCellRevealsIt(){
         GridOfSquares grid = new GridOfSquares(2,2);
-        Game game = new Game(grid);
+        Game<Coordinate> game = new Game<>(grid);
         Coordinate safe = new Coordinate(1,1);
 
 
@@ -40,8 +40,8 @@ public class GameTest {
     @Test
     public void openingSafeCellContinuesTheGame(){
         GridOfSquares grid = new GridOfSquares(2,2);
-        Game game = new Game(grid);
-        GridInitializer initializer = new GridInitializer(grid);
+        Game<Coordinate> game = new Game<>(grid);
+        GridInitializer<Coordinate> initializer = new GridInitializer<>(grid);
 
         Coordinate mine = new Coordinate(1,1);
         Coordinate safe = new Coordinate(2,2);
@@ -57,8 +57,8 @@ public class GameTest {
     @Test
     public void cannotOpenCellAfterGameIsLost(){
         GridOfSquares grid = new GridOfSquares(2,2);
-        Game game = new Game(grid);
-        GridInitializer initializer = new GridInitializer(grid);
+        Game<Coordinate> game = new Game<>(grid);
+        GridInitializer<Coordinate> initializer = new GridInitializer<>(grid);
         Coordinate mine = new Coordinate(1,1);
 
         initializer.placeMine(mine);
@@ -74,8 +74,8 @@ public class GameTest {
     @Test
     void gameIsWonWhenAllSafeCellsAreRevealed() {
         GridOfSquares grid = new GridOfSquares(1, 2);
-        Game game = new Game(grid);
-        GridInitializer initializer = new GridInitializer(grid);
+        Game<Coordinate> game = new Game<>(grid);
+        GridInitializer<Coordinate> initializer = new GridInitializer<>(grid);
 
         Coordinate mine = new Coordinate(1,1);
         Coordinate safe = new Coordinate(1,2);
@@ -94,7 +94,7 @@ public class GameTest {
         GridOfSquares grid = new GridOfSquares(2, 2);
         Coordinate cell = new Coordinate(1,1);
 
-        Game game = new Game(grid);
+        Game<Coordinate> game = new Game<>(grid);
 
         game.toggleFlag(cell);
         game.openCell(cell);
@@ -106,7 +106,7 @@ public class GameTest {
     void openingCellWithZeroNeighborMinesRevealsNeighbors() {
         GridOfSquares grid = new GridOfSquares(3,3);
 
-        Game game = new Game(grid);
+        Game<Coordinate> game = new Game<>(grid);
 
         Coordinate center = new Coordinate(2,2);
 
@@ -122,7 +122,7 @@ public class GameTest {
         GridOfSquares grid = new GridOfSquares(2,2);
         Coordinate c = new Coordinate(1,1);
 
-        Game game = new Game(grid);
+        Game<Coordinate> game = new Game<>(grid);
 
         game.toggleFlag(c);
         game.toggleFlag(c);
