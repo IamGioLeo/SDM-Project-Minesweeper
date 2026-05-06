@@ -14,10 +14,10 @@ public class GameTest {
 
     @Test
     public void openingAMineEndsTheGame() {
-        GridOfSquares grid = new GridOfSquares(2,2);
+        GridOfSquares grid = new GridOfSquares(2, 2);
         Game<Coordinate> game = new Game<>(grid);
         GridInitializer<Coordinate> initializer = new GridInitializer<>(grid);
-        Coordinate mine = new Coordinate(1,1);
+        Coordinate mine = new Coordinate(1, 1);
 
         initializer.placeMine(mine);
         game.openCell(mine);
@@ -26,10 +26,10 @@ public class GameTest {
     }
 
     @Test
-    public void openingSafeCellRevealsIt(){
-        GridOfSquares grid = new GridOfSquares(2,2);
+    public void openingSafeCellRevealsIt() {
+        GridOfSquares grid = new GridOfSquares(2, 2);
         Game<Coordinate> game = new Game<>(grid);
-        Coordinate safe = new Coordinate(1,1);
+        Coordinate safe = new Coordinate(1, 1);
 
 
         game.openCell(safe);
@@ -38,13 +38,13 @@ public class GameTest {
     }
 
     @Test
-    public void openingSafeCellContinuesTheGame(){
-        GridOfSquares grid = new GridOfSquares(2,2);
+    public void openingSafeCellContinuesTheGame() {
+        GridOfSquares grid = new GridOfSquares(2, 2);
         Game<Coordinate> game = new Game<>(grid);
         GridInitializer<Coordinate> initializer = new GridInitializer<>(grid);
 
-        Coordinate mine = new Coordinate(1,1);
-        Coordinate safe = new Coordinate(2,2);
+        Coordinate mine = new Coordinate(1, 1);
+        Coordinate safe = new Coordinate(2, 2);
 
         initializer.placeMine(mine);
 
@@ -55,18 +55,18 @@ public class GameTest {
     }
 
     @Test
-    public void cannotOpenCellAfterGameIsLost(){
-        GridOfSquares grid = new GridOfSquares(2,2);
+    public void cannotOpenCellAfterGameIsLost() {
+        GridOfSquares grid = new GridOfSquares(2, 2);
         Game<Coordinate> game = new Game<>(grid);
         GridInitializer<Coordinate> initializer = new GridInitializer<>(grid);
-        Coordinate mine = new Coordinate(1,1);
+        Coordinate mine = new Coordinate(1, 1);
 
         initializer.placeMine(mine);
 
 
-        game.openCell(mine); //lose
+        game.openCell(mine);
 
-        Coordinate other = new Coordinate(1,2);
+        Coordinate other = new Coordinate(1, 2);
         game.openCell(other);
         assertFalse(grid.getCell(other).isRevealed());
     }
@@ -77,11 +77,10 @@ public class GameTest {
         Game<Coordinate> game = new Game<>(grid);
         GridInitializer<Coordinate> initializer = new GridInitializer<>(grid);
 
-        Coordinate mine = new Coordinate(1,1);
-        Coordinate safe = new Coordinate(1,2);
+        Coordinate mine = new Coordinate(1, 1);
+        Coordinate safe = new Coordinate(1, 2);
 
         initializer.placeMine(mine);
-
 
 
         game.openCell(safe);
@@ -90,9 +89,9 @@ public class GameTest {
     }
 
     @Test
-    void flaggedCellCannotBeOpened(){
+    void flaggedCellCannotBeOpened() {
         GridOfSquares grid = new GridOfSquares(2, 2);
-        Coordinate cell = new Coordinate(1,1);
+        Coordinate cell = new Coordinate(1, 1);
 
         Game<Coordinate> game = new Game<>(grid);
 
@@ -104,23 +103,37 @@ public class GameTest {
 
     @Test
     void openingCellWithZeroNeighborMinesRevealsNeighbors() {
-        GridOfSquares grid = new GridOfSquares(3,3);
+        GridOfSquares grid = new GridOfSquares(3, 3);
 
         Game<Coordinate> game = new Game<>(grid);
 
-        Coordinate center = new Coordinate(2,2);
+        Coordinate center = new Coordinate(2, 2);
 
         game.openCell(center);
 
-        for(Cell neighbor : grid.getCellNeighbors(center)) {
+        for (Cell neighbor : grid.getCellNeighbors(center)) {
             assertTrue(neighbor.isRevealed());
         }
     }
 
     @Test
+    void flaggedCellCannotBeOpenedInASequenceOfOpenings() {
+        GridOfSquares grid = new GridOfSquares(2, 2);
+        Coordinate flaggedCell = new Coordinate(1, 1);
+        Coordinate cellToOpen = new Coordinate(1, 1);
+
+        Game<Coordinate> game = new Game<>(grid);
+
+        game.toggleFlag(flaggedCell);
+        game.openCell(cellToOpen);
+
+        assertFalse(grid.getCell(flaggedCell).isRevealed());
+    }
+
+    @Test
     void flaggedCellCanBeUnflaggedAndOpened() {
-        GridOfSquares grid = new GridOfSquares(2,2);
-        Coordinate c = new Coordinate(1,1);
+        GridOfSquares grid = new GridOfSquares(2, 2);
+        Coordinate c = new Coordinate(1, 1);
 
         Game<Coordinate> game = new Game<>(grid);
 
