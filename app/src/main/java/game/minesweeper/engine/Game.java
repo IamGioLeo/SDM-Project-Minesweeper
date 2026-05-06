@@ -2,6 +2,11 @@ package game.minesweeper.engine;
 
 import game.minesweeper.grid.*;
 
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Set;
+
 public class Game<C extends CoordinateInterface> {
 
     private final AbstractGrid<C> grid;
@@ -25,25 +30,40 @@ public class Game<C extends CoordinateInterface> {
             return;
         }
 
-        revealRecursively(coordinate);
+        revealCellsInSequence(coordinate);
 
         checkWinCondition();
+
     }
 
-    private void revealRecursively(C coordinate) {
+    private void revealCellsInSequence(C coordinate) {
 
-        Cell cell = grid.getCell(coordinate);
+        Set<C> visited = new HashSet<>();
+        Queue<C> queue = new LinkedList<>();
+        visited.add(coordinate);
+        queue.add(coordinate);
 
-        if (cell == null || cell.isRevealed() || cell.isFlagged()) {
-            return;
-        }
+        while (!queue.isEmpty()) {
 
-        cell.reveal();
+            C currentCoordinate = queue.poll();
+            Cell cell = grid.getCell(currentCoordinate);
 
-        if (cell.neighborsMineCount() == 0) {
-            for (C neighbor : grid.getNeighborCoordinates(coordinate)) {
-                revealRecursively(neighbor);
+            if (cell == null) continue;
+
+            if (cell.neighborsMineCount() == 0) {
+                for (C neighborCoordinate : grid.getNeighborCoordinates(currentCoordinate)) {
+                    if (!visited.contains(neighborCoordinate)) {
+                        visited.add(neighborCoordinate);
+                        queue.add(neighborCoordinate);
+                    }
+                }
             }
+
+            if (cell.isRevealed() || cell.isFlagged()) {
+                continue;
+            }
+
+            cell.reveal();
         }
     }
 
