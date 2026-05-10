@@ -45,6 +45,9 @@ public class StartingMenu {
 
                 case "personalized", "p":
                     int[] configuration = personalizationLoop();
+                    columns = configuration[0];
+                    rows = configuration[1];
+                    mines = configuration[2];
                     break;
 
                 case "gui", "g":
