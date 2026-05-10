@@ -58,6 +58,20 @@ public class GameControllerTest {
     }
 
     @Test
+    void openingAlreadyRevealedCellDoesNotChangeBoard() {
+
+        GridOfSquares grid = new GridOfSquares(2,2);
+        GameController controller =
+                new GameController(new Game<>(grid));
+
+        controller.open(1,1);
+
+        CommandResult result = controller.open(1,1);
+
+        assertFalse(result.boardChanged());
+    }
+
+    @Test
     void openANonExistingCellThrowsException() {
         GridOfSquares grid = new GridOfSquares(2,2);
         GameController controller = new GameController(new Game<>(grid));
