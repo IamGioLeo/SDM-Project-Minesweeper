@@ -9,6 +9,17 @@ public abstract class AbstractGrid3D extends AbstractGrid<Coordinate3D> {
     protected final int depth;
 
     public AbstractGrid3D(int width, int height, int depth) {
+
+        if (width <= 0) {
+            throw new IllegalArgumentException("Width must be greater than zero. Got " + width + ".");
+        }
+        if (height <= 0) {
+            throw new IllegalArgumentException("Height must be greater than zero. Got " + height + ".");
+        }
+        if (depth <= 0) {
+            throw new IllegalArgumentException("Depth must be greater than zero. Got " + depth + ".");
+        }
+
         this.width = width;
         this.height = height;
         this.depth = depth;
