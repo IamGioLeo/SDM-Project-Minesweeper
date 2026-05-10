@@ -57,4 +57,12 @@ public class GameControllerTest {
         assertTrue(result.boardChanged());
     }
 
+    @Test
+    void openANonExistingCellThrowsException() {
+        GridOfSquares grid = new GridOfSquares(2,2);
+        GameController controller = new GameController(new Game<>(grid));
+
+        assertThrows(InvalidCellCoordinateException.class, () -> controller.open(6,7));
+    }
+
 }
