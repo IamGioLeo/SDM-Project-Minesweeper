@@ -3,6 +3,7 @@ package game.minesweeper.CLI;
 import game.minesweeper.engine.CommandResult;
 import game.minesweeper.engine.GameController;
 import game.minesweeper.engine.GameState;
+import game.minesweeper.engine.InvalidCellCoordinateException;
 import game.minesweeper.grid.GridOfSquares;
 
 import java.util.Scanner;
@@ -30,20 +31,32 @@ public class ConsoleUI {
                 case "open", "o": {
                     row = scanner.nextInt();
                     col = scanner.nextInt();
-                    CommandResult result = controller.open(row, col);
-                    if (result.boardChanged()) {
-                        GridPrinter.print(controller, grid);
+
+                    try {
+                        CommandResult result = controller.open(row, col);
+                        if (result.boardChanged()) {
+                            GridPrinter.print(controller, grid);
+                        }
+                    } catch (InvalidCellCoordinateException e){
+                        System.out.println(e.getMessage());
                     }
+
                     break;
                 }
 
                 case "flag", "f": {
                     row = scanner.nextInt();
                     col = scanner.nextInt();
-                    CommandResult result = controller.toggleFlag(row, col);
-                    if (result.boardChanged()) {
-                        GridPrinter.print(controller, grid);
+
+                    try {
+                        CommandResult result = controller.toggleFlag(row, col);
+                        if (result.boardChanged()) {
+                            GridPrinter.print(controller, grid);
+                        }
+                    } catch (InvalidCellCoordinateException e){
+                        System.out.println(e.getMessage());
                     }
+
                     break;
                 }
 
