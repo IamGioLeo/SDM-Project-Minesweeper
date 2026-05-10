@@ -7,7 +7,7 @@ public class GridOfSquaresTest implements Grid2DContract {
 
     @Override
     public Coordinate borderCoordinate() {
-        return new Coordinate(5,1);
+        return new Coordinate(5, 1);
     }
 
     @Override
@@ -31,6 +31,11 @@ public class GridOfSquaresTest implements Grid2DContract {
     }
 
     @Override
+    public GridOfSquares createGridWithSize(int numberOfRows, int numberOfColumns) {
+        return new GridOfSquares(numberOfRows, numberOfColumns);
+    }
+
+    @Override
     public GridOfSquares createGrid() {
         return new GridOfSquares(expectedNumberOfRows(), expectedNumberOfColumns());
     }
@@ -47,7 +52,7 @@ public class GridOfSquaresTest implements Grid2DContract {
 
     @Override
     public Coordinate coordinateWithMaximumNumberOfNeighbors() {
-        return new Coordinate(6,7);
+        return new Coordinate(6, 7);
     }
 
     @Override

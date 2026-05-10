@@ -39,6 +39,22 @@ public interface Grid2DContract extends GridContractTest<Coordinate, AbstractGri
         return 1;
     }
 
+    AbstractGrid2D createGridWithSize(int numberOfRows, int numberOfColumns);
+
+    @Test
+    default void constructorThrowsExceptionForInvalidRows() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            createGridWithSize(0, 5);
+        });
+    }
+
+    @Test
+    default void constructorThrowsExceptionForInvalidColumns() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            createGridWithSize(5, 0);
+        });
+    }
+
     @Test
     default void gridHasExpectedNumberOfRows() {
         AbstractGrid2D grid = createGrid();

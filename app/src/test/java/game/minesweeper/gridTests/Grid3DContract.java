@@ -3,8 +3,7 @@ package game.minesweeper.gridTests;
 import game.minesweeper.grid.*;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public interface Grid3DContract extends GridContractTest<Coordinate3D, AbstractGrid3D> {
 
@@ -41,6 +40,23 @@ public interface Grid3DContract extends GridContractTest<Coordinate3D, AbstractG
     @Override
     default int expectedTotalCells(){
         return expectedHeight() * expectedWidth() * expectedDepth();
+    }
+
+    AbstractGrid3D createGridWithSizes(int width, int height, int depth);
+
+    @Test
+    default void constructorThrowsExceptionForInvalidWidth(){
+        assertThrows(IllegalArgumentException.class, () -> createGridWithSizes(-1, 9, 9));
+    }
+
+    @Test
+    default void constructorThrowsExceptionForInvalidHeight(){
+        assertThrows(IllegalArgumentException.class, () -> createGridWithSizes(9, -1, 9));
+    }
+
+    @Test
+    default void constructorThrowsExceptionForInvalidDepth(){
+        assertThrows(IllegalArgumentException.class, () -> createGridWithSizes(9, 9, -1));
     }
 
     @Test
