@@ -35,10 +35,7 @@ public class GameController {
 
     public CellView getCellView(int row, int column) {
 
-        Coordinate coordinate = new Coordinate(row, column);
-        Cell cell = game.getGrid().getCell(coordinate);
-
-        if (cell == null) return null;
+        Cell cell = getExistingCell(row, column);
 
         return new CellView(
                 cell.isRevealed(),
@@ -46,6 +43,19 @@ public class GameController {
                 cell.hasMine(),
                 cell.neighborsMineCount()
         );
+    }
+
+    private Cell getExistingCell(int row, int column) {
+
+        Coordinate coordinate = new Coordinate(row, column);
+
+        Cell cell = game.getGrid().getCell(coordinate);
+
+        if (cell == null) {
+            throw new InvalidCellCoordinateException(row, column);
+        }
+
+        return cell;
     }
 
 
