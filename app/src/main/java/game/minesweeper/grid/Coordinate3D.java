@@ -9,6 +9,6 @@ public record Coordinate3D(int x, int y, int z) implements CoordinateInterface {
 
     @Override
     public String displayString() {
-        return x + "," + y + "'" + z;
+        return x + "," + y + "," + z;
     }
 }
