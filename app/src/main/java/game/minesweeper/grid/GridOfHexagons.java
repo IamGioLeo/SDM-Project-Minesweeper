@@ -30,20 +30,27 @@ public class GridOfHexagons extends AbstractGrid2D {
         int column = coordinate.column();
         List<Coordinate> neighbors = new ArrayList<>();
 
-        for (int d = -1; d <= 1; d++) {
-            if (d == 0) continue;
-            Coordinate columnNeighbor = new Coordinate(row, column + d);
-            Coordinate rowNeighbor = new Coordinate(row + d, column);
-            if (cells.containsKey(columnNeighbor)) neighbors.add(columnNeighbor);
-            if (cells.containsKey(rowNeighbor)) neighbors.add(rowNeighbor);
-        }
+        if (cells.containsKey(new Coordinate(row - 1, column)))
+            neighbors.add(new Coordinate(row - 1, column));
+        if (cells.containsKey(new Coordinate(row + 1, column)))
+            neighbors.add(new Coordinate(row + 1, column));
+        if (cells.containsKey(new Coordinate(row, column - 1)))
+            neighbors.add(new Coordinate(row, column - 1));
+        if (cells.containsKey(new Coordinate(row, column + 1)))
+            neighbors.add(new Coordinate(row, column + 1));
 
         if (upLineHexagons.contains(coordinate)) {
-            neighbors.add(new Coordinate(row - 1, column - 1));
-            neighbors.add(new Coordinate(row - 1, column + 1));
+            if (cells.containsKey(new Coordinate(row - 1, column - 1)))
+                neighbors.add(new Coordinate(row - 1, column - 1));
+
+            if (cells.containsKey(new Coordinate(row - 1, column + 1)))
+                neighbors.add(new Coordinate(row - 1, column + 1));
+
         } else if (downLineHexagons.contains(coordinate)) {
-            neighbors.add(new Coordinate(row + 1, column - 1));
-            neighbors.add(new Coordinate(row + 1, column + 1));
+            if (cells.containsKey(new Coordinate(row + 1, column - 1)))
+                neighbors.add(new Coordinate(row + 1, column - 1));
+            if (cells.containsKey(new Coordinate(row + 1, column + 1)))
+                neighbors.add(new Coordinate(row + 1, column + 1));
         }
         return neighbors;
     }
