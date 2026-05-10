@@ -15,10 +15,11 @@ public class ConsoleUI {
 
         GridPrinter.print(controller, grid);
 
-        while (controller.getGameState() == GameState.RUNNING) {
+        System.out.println("Enter command to open a cell or to place/remove a flag:");
+        System.out.println("open(o) row col | flag(f) row col");
 
-            System.out.println("Enter command to open a cell or to place/remove a flag:");
-            System.out.println("open(o) row col | flag(f) row col");
+        gameLoop:
+        while (controller.getGameState() == GameState.RUNNING) {
 
             String command = scanner.next().toLowerCase();
 
@@ -45,6 +46,15 @@ public class ConsoleUI {
                     }
                     break;
                 }
+
+                case "help":
+                    System.out.println("Enter command to open a cell or to place/remove a flag:");
+                    System.out.println("open(o) row col | flag(f) row col");
+                    System.out.println("To quit the game: q");
+                    break;
+
+                case "quit", "q":
+                    break gameLoop;
 
                 default:
                     System.out.println("Invalid command");
