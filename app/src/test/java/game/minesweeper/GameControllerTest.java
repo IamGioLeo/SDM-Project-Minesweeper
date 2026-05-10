@@ -78,4 +78,17 @@ public class GameControllerTest {
         );
     }
 
+    @Test
+    void getCellViewWithInvalidCoordinateThrowsException() {
+
+        GridOfSquares grid = new GridOfSquares(2,2);
+        GameController controller =
+                new GameController(new Game<>(grid));
+
+        assertThrows(
+                InvalidCellCoordinateException.class,
+                () -> controller.getCellView(-1,4)
+        );
+    }
+
 }
