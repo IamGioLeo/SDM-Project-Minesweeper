@@ -19,9 +19,7 @@ public class StartingMenu {
         int rows = 9;
         int mines = 10;
 
-        System.out.println("Chose the defaults game difficulties: easy (e), medium (m), hard (h)");
-        System.out.println("Or personalize your game: personalize (p)");
-        System.out.println("To play on the Graphical User Interface: gui (g)");
+        printOptionMessage();
 
         menuLoop:
         while (true) {
@@ -46,16 +44,10 @@ public class StartingMenu {
                     break;
 
                 case "personalized", "p":
-                    System.out.println("How many Columns?");
-                    columns = scanner.nextInt();
-                    System.out.println("How many Rows?");
-                    rows = scanner.nextInt();
-                    System.out.println("How many mines?");
-                    mines = scanner.nextInt();
-                    if (columns * rows < mines) {
-                        System.out.println("There are too many mines!");
-                        continue;
-                    }
+                    int[] configuration = personalizationLoop();
+                    columns = configuration[0];
+                    rows = configuration[1];
+                    mines = configuration[2];
                     break;
 
                 case "gui", "g":
@@ -63,9 +55,7 @@ public class StartingMenu {
                     return;
 
                 case "help":
-                    System.out.println("Chose the defaults game difficulties: easy (e), medium (m), hard (h)");
-                    System.out.println("Or access personalized setting: personalize (p)");
-                    System.out.println("To play on the Graphical User Interface: gui (g)");
+                    printOptionMessage();
                     System.out.println("To exit: exit");
                     continue;
 
@@ -87,16 +77,50 @@ public class StartingMenu {
                     case "y", "yes":
                         continue;
                     case "menu":
-                        System.out.println("Chose the defaults game difficulties: easy (e), medium (m), hard (h)");
-                        System.out.println("Or personalize your game: personalize (p)");
-                        System.out.println("To play on the Graphical User Interface: gui (g)");
-
+                        printOptionMessage();
                         continue menuLoop;
                     default:
                         return;
                 }
             }
         }
+    }
+
+    public static int[] personalizationLoop() {
+
+        int[] configuration = new int[3];
+
+        while (true) {
+            System.out.println("How many Columns?");
+            configuration[0] = scanner.nextInt();
+            if (configuration[0] <= 0) {
+                System.out.println("Columns must be greater than 0!");
+                continue;
+            }
+            break;
+        }
+
+        while (true) {
+            System.out.println("How many Rows?");
+            configuration[1] = scanner.nextInt();
+            if (configuration[1] <= 0) {
+                System.out.println("Rows must be greater than 0!");
+                continue;
+            }
+            break;
+        }
+
+        while (true) {
+            System.out.println("How many mines?");
+            configuration[2] = scanner.nextInt();
+            if (configuration[0] * configuration[1] < configuration[2]) {
+                System.out.println("There are too many mines!\n");
+                continue;
+            }
+            break;
+        }
+
+        return configuration;
     }
 
     public static void startGame(int rows, int columns, int mines) {
@@ -111,6 +135,12 @@ public class StartingMenu {
         ConsoleUI ui = new ConsoleUI();
         ui.start(controller, grid);
 
+    }
+
+    public static void printOptionMessage() {
+        System.out.println("Chose the defaults game difficulties: easy (e), medium (m), hard (h)");
+        System.out.println("Or personalize your game: personalize (p)");
+        System.out.println("To play on the Graphical User Interface: gui (g)");
     }
 
 }
