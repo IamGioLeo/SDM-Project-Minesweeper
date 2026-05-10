@@ -19,9 +19,7 @@ public class StartingMenu {
         int rows = 9;
         int mines = 10;
 
-        System.out.println("Chose the defaults game difficulties: easy (e), medium (m), hard (h)");
-        System.out.println("Or personalize your game: personalize (p)");
-        System.out.println("To play on the Graphical User Interface: gui (g)");
+        printOptionMessage();
 
         menuLoop:
         while (true) {
@@ -54,9 +52,7 @@ public class StartingMenu {
                     return;
 
                 case "help":
-                    System.out.println("Chose the defaults game difficulties: easy (e), medium (m), hard (h)");
-                    System.out.println("Or access personalized setting: personalize (p)");
-                    System.out.println("To play on the Graphical User Interface: gui (g)");
+                    printOptionMessage();
                     System.out.println("To exit: exit");
                     continue;
 
@@ -78,10 +74,7 @@ public class StartingMenu {
                     case "y", "yes":
                         continue;
                     case "menu":
-                        System.out.println("Chose the defaults game difficulties: easy (e), medium (m), hard (h)");
-                        System.out.println("Or personalize your game: personalize (p)");
-                        System.out.println("To play on the Graphical User Interface: gui (g)");
-
+                        printOptionMessage();
                         continue menuLoop;
                     default:
                         return;
@@ -139,6 +132,12 @@ public class StartingMenu {
         ConsoleUI ui = new ConsoleUI();
         ui.start(controller, grid);
 
+    }
+
+    public static void printOptionMessage() {
+        System.out.println("Chose the defaults game difficulties: easy (e), medium (m), hard (h)");
+        System.out.println("Or personalize your game: personalize (p)");
+        System.out.println("To play on the Graphical User Interface: gui (g)");
     }
 
 }
