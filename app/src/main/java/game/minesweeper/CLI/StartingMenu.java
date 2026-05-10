@@ -117,6 +117,10 @@ public class StartingMenu {
                 System.out.println("There are too many mines!\n");
                 continue;
             }
+            if (configuration[2] < 1) {
+                System.out.println("You have to put at least 1 mine!");
+                continue;
+            }
             break;
         }
 
