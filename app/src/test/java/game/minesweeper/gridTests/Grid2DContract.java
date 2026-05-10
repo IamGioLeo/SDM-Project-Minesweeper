@@ -16,11 +16,11 @@ public interface Grid2DContract extends GridContractTest<Coordinate, AbstractGri
         return new Coordinate(1, 1);
     }
 
-    Coordinate boarderCoordinate();
+    Coordinate borderCoordinate();
 
     int expectedNumberOfCornerNeighbors();
 
-    int expectedNumberOfBoarderNeighbors();
+    int expectedNumberOfBorderNeighbors();
 
     int expectedNumberOfRows();
 
@@ -63,12 +63,12 @@ public interface Grid2DContract extends GridContractTest<Coordinate, AbstractGri
     }
 
     @Test
-    default void gridHasExpectedNumberOfBoarderNeighbors() {
+    default void gridHasExpectedNumberOfBorderNeighbors() {
         AbstractGrid2D grid = createGrid();
 
-        int numberOfBoarderNeighbors = grid.getCellNeighbors(boarderCoordinate()).size();
+        int numberOfBorderNeighbors = grid.getCellNeighbors(borderCoordinate()).size();
 
-        assertEquals(expectedNumberOfBoarderNeighbors(), numberOfBoarderNeighbors);
+        assertEquals(expectedNumberOfBorderNeighbors(), numberOfBorderNeighbors);
     }
 
     @Test

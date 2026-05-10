@@ -15,12 +15,12 @@ public class GridOfHexagonsTest implements Grid2DContract {
     }
 
     @Override
-    public Coordinate boarderCoordinate() {
+    public Coordinate borderCoordinate() {
         return new Coordinate(5,1);
     }
 
     @Override
-    public int expectedNumberOfBoarderNeighbors() {
+    public int expectedNumberOfBorderNeighbors() {
         return 4;
     }
 
@@ -70,7 +70,7 @@ public class GridOfHexagonsTest implements Grid2DContract {
     }
 
     @Test
-    public void topBoarderCellsHaveCorrectNumberOfNeighbors() {
+    public void topBorderCellsHaveCorrectNumberOfNeighbors() {
         GridOfHexagons grid = createGrid();
         Coordinate coordinate = new Coordinate(1, 5);
         Coordinate coordinate2 = new Coordinate(1, 4);
@@ -83,7 +83,7 @@ public class GridOfHexagonsTest implements Grid2DContract {
     }
 
     @Test
-    public void leftBoarderCellHaveCorrectNumberOfNeighbors() {
+    public void leftBorderCellHaveCorrectNumberOfNeighbors() {
         GridOfHexagons grid = createGrid();
         Coordinate coordinate = new Coordinate(4, 1);
         Coordinate coordinate2 = new Coordinate(5, 1);

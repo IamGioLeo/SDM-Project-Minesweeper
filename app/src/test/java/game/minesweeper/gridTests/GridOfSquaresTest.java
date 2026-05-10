@@ -6,7 +6,7 @@ import game.minesweeper.grid.GridOfSquares;
 public class GridOfSquaresTest implements Grid2DContract {
 
     @Override
-    public Coordinate boarderCoordinate() {
+    public Coordinate borderCoordinate() {
         return new Coordinate(5,1);
     }
 
@@ -16,7 +16,7 @@ public class GridOfSquaresTest implements Grid2DContract {
     }
 
     @Override
-    public int expectedNumberOfBoarderNeighbors() {
+    public int expectedNumberOfBorderNeighbors() {
         return 5;
     }
 
