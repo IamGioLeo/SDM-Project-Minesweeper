@@ -8,6 +8,11 @@ public abstract class AbstractGrid2D extends AbstractGrid<Coordinate> {
     protected final int numberOfColumns;
 
     public AbstractGrid2D(int numberOfRows, int numberOfColumns) {
+
+        if (numberOfRows <= 0 || numberOfColumns <= 0) {
+            throw new InvalidGridSizeException(numberOfRows, numberOfColumns);
+        }
+
         this.numberOfRows = numberOfRows;
         this.numberOfColumns = numberOfColumns;
         initCells();
