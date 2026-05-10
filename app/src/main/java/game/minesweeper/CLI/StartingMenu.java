@@ -46,16 +46,7 @@ public class StartingMenu {
                     break;
 
                 case "personalized", "p":
-                    System.out.println("How many Columns?");
-                    columns = scanner.nextInt();
-                    System.out.println("How many Rows?");
-                    rows = scanner.nextInt();
-                    System.out.println("How many mines?");
-                    mines = scanner.nextInt();
-                    if (columns * rows < mines) {
-                        System.out.println("There are too many mines!");
-                        continue;
-                    }
+                    int[] configuration = personalizationLoop();
                     break;
 
                 case "gui", "g":
@@ -97,6 +88,43 @@ public class StartingMenu {
                 }
             }
         }
+    }
+
+    public static int[] personalizationLoop() {
+
+        int[] configuration = new int[3];
+
+        while (true) {
+            System.out.println("How many Columns?");
+            configuration[0] = scanner.nextInt();
+            if (configuration[0] <= 0) {
+                System.out.println("Columns must be greater than 0!");
+                continue;
+            }
+            break;
+        }
+
+        while (true) {
+            System.out.println("How many Rows?");
+            configuration[1] = scanner.nextInt();
+            if (configuration[1] <= 0) {
+                System.out.println("Rows must be greater than 0!");
+                continue;
+            }
+            break;
+        }
+
+        while (true) {
+            System.out.println("How many mines?");
+            configuration[2] = scanner.nextInt();
+            if (configuration[0] * configuration[1] < configuration[2]) {
+                System.out.println("There are too many mines!\n");
+                continue;
+            }
+            break;
+        }
+
+        return configuration;
     }
 
     public static void startGame(int rows, int columns, int mines) {
