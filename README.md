@@ -10,14 +10,30 @@ A Java implementation of the classic Minesweeper game, featuring both a Command 
     - Hard
 - Customizable grid size and mine count
 
+## Requirements
+
+- Java 25 or newer
+
 ## Build and Run
 
-1) Clone the repository:
-  'git clone https://github.com/matteocrosariol/SDM-Project-Minesweeper.git'
-2) Build the project with Gradle:
-   '/gradlew build'
-3) Run the application using Gradle:
-   './gradlew run'
+Clone the repository:
+
+```bash
+git clone https://github.com/matteocrosariol/SDM-Project-Minesweeper.git
+cd SDM-Project-Minesweeper
+```
+
+Build the project with Gradle:
+
+```bash
+./gradlew build
+```
+
+Run the application:
+
+```bash
+./gradlew run
+```
 
 
 
