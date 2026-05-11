@@ -67,6 +67,7 @@ public class StartingMenu {
 
                 default:
                     System.out.println("Invalid option!");
+                    scanner.nextLine();
                     continue;
             }
 
