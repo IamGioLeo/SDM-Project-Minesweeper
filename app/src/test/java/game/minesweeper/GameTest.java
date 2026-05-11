@@ -145,4 +145,18 @@ public class GameTest {
         assertTrue(grid.getCell(c).isRevealed());
     }
 
+    @Test
+    void revealedCellCannotBeFlagged() {
+
+        GridOfSquares grid = new GridOfSquares(2,2);
+        Game<Coordinate> game = new Game<>(grid);
+
+        Coordinate c = new Coordinate(1,1);
+
+        game.openCell(c);
+        game.toggleFlag(c);
+
+        assertFalse(grid.getCell(c).isFlagged());
+    }
+
 }

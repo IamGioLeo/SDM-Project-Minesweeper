@@ -6,6 +6,7 @@ import game.minesweeper.engine.GameController;
 import game.minesweeper.engine.GridInitializer;
 import game.minesweeper.grid.Coordinate;
 import game.minesweeper.grid.GridOfSquares;
+import game.minesweeper.grid.InvalidGridSizeException;
 
 import java.util.Scanner;
 
@@ -68,7 +69,12 @@ public class StartingMenu {
             }
 
             while (true) {
-                startGame(rows, columns, mines);
+                try {
+                    startGame(rows, columns, mines);
+                } catch (InvalidGridSizeException e) {
+                    System.out.println(e.getMessage());
+                    continue menuLoop;
+                }
 
                 System.out.println("Do you want to start a new game? (y/n)");
                 String newGame = scanner.next().toLowerCase();

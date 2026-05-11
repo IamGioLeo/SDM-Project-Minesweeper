@@ -46,17 +46,17 @@ public interface Grid3DContract extends GridContractTest<Coordinate3D, AbstractG
 
     @Test
     default void constructorThrowsExceptionForInvalidWidth(){
-        assertThrows(IllegalArgumentException.class, () -> createGridWithSizes(-1, 9, 9));
+        assertThrows(InvalidGridSizeException.class, () -> createGridWithSizes(-1, 9, 9));
     }
 
     @Test
     default void constructorThrowsExceptionForInvalidHeight(){
-        assertThrows(IllegalArgumentException.class, () -> createGridWithSizes(9, -1, 9));
+        assertThrows(InvalidGridSizeException.class, () -> createGridWithSizes(9, -1, 9));
     }
 
     @Test
     default void constructorThrowsExceptionForInvalidDepth(){
-        assertThrows(IllegalArgumentException.class, () -> createGridWithSizes(9, 9, -1));
+        assertThrows(InvalidGridSizeException.class, () -> createGridWithSizes(9, 9, -1));
     }
 
     @Test
