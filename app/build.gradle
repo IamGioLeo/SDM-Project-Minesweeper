@@ -42,8 +42,21 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
+tasks.named('run', JavaExec) {
+
+    def mode = (project.findProperty("mode") ?: "CLI").toUpperCase()
+
+    if (mode == "GUI") {
+        mainClass.set("game.minesweeper.GUI.MinesweeperGUI")
+    } else {
+        mainClass.set("game.minesweeper.Minesweeper")
+    }
+
+    standardInput = System.in
+}
+
 jar {
     manifest {
-        attributes('Main-Class':'game.minesweeper.Minesweeper')
+        attributes('Main-Class': 'game.minesweeper.Minesweeper')
     }
 }
