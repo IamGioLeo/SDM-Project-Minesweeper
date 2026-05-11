@@ -6,6 +6,7 @@ import game.minesweeper.engine.GameState;
 import game.minesweeper.engine.InvalidCellCoordinateException;
 import game.minesweeper.grid.GridOfSquares;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ConsoleUI {
@@ -29,15 +30,20 @@ public class ConsoleUI {
 
             switch (command) {
                 case "open", "o": {
-                    row = scanner.nextInt();
-                    col = scanner.nextInt();
+                    try {
+                        row = scanner.nextInt();
+                        col = scanner.nextInt();
+                    } catch (InputMismatchException e) {
+                        System.out.println("Coordinates must be integers!");
+                        break;
+                    }
 
                     try {
                         CommandResult result = controller.open(row, col);
                         if (result.boardChanged()) {
                             GridPrinter.print(controller, grid);
                         }
-                    } catch (InvalidCellCoordinateException e){
+                    } catch (InvalidCellCoordinateException e) {
                         System.out.println(e.getMessage());
                     }
 
@@ -45,15 +51,20 @@ public class ConsoleUI {
                 }
 
                 case "flag", "f": {
-                    row = scanner.nextInt();
-                    col = scanner.nextInt();
+                    try {
+                        row = scanner.nextInt();
+                        col = scanner.nextInt();
+                    } catch (InputMismatchException e) {
+                        System.out.println("Coordinates must be integers!");
+                        break;
+                    }
 
                     try {
                         CommandResult result = controller.toggleFlag(row, col);
                         if (result.boardChanged()) {
                             GridPrinter.print(controller, grid);
                         }
-                    } catch (InvalidCellCoordinateException e){
+                    } catch (InvalidCellCoordinateException e) {
                         System.out.println(e.getMessage());
                     }
 

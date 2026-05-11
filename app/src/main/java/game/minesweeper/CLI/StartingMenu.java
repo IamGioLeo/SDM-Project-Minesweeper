@@ -8,6 +8,7 @@ import game.minesweeper.grid.Coordinate;
 import game.minesweeper.grid.GridOfSquares;
 import game.minesweeper.grid.InvalidGridSizeException;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class StartingMenu {
@@ -92,42 +93,61 @@ public class StartingMenu {
         }
     }
 
+
     public static int[] personalizationLoop() {
 
         int[] configuration = new int[3];
 
         while (true) {
             System.out.println("How many Columns?");
-            configuration[0] = scanner.nextInt();
-            if (configuration[0] <= 0) {
-                System.out.println("Columns must be greater than 0!");
+            try {
+                configuration[0] = scanner.nextInt();
+                if (configuration[0] <= 0) {
+                    System.out.println("Columns must be greater than 0!");
+                    continue;
+                }
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Columns must be an integer!");
+                scanner.nextLine();
                 continue;
             }
-            break;
         }
 
         while (true) {
             System.out.println("How many Rows?");
-            configuration[1] = scanner.nextInt();
-            if (configuration[1] <= 0) {
-                System.out.println("Rows must be greater than 0!");
+            try {
+                configuration[1] = scanner.nextInt();
+                if (configuration[1] <= 0) {
+                    System.out.println("Rows must be greater than 0!");
+                    continue;
+                }
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Rows must be an integer!");
+                scanner.nextLine();
                 continue;
             }
-            break;
         }
 
         while (true) {
             System.out.println("How many mines?");
-            configuration[2] = scanner.nextInt();
-            if (configuration[0] * configuration[1] < configuration[2]) {
-                System.out.println("There are too many mines!\n");
+            try {
+                configuration[2] = scanner.nextInt();
+                if (configuration[0] * configuration[1] < configuration[2]) {
+                    System.out.println("There are too many mines!\n");
+                    continue;
+                }
+                if (configuration[2] < 1) {
+                    System.out.println("You have to put at least 1 mine!");
+                    continue;
+                }
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Mine must be an integer!");
+                scanner.nextLine();
                 continue;
             }
-            if (configuration[2] < 1) {
-                System.out.println("You have to put at least 1 mine!");
-                continue;
-            }
-            break;
         }
 
         return configuration;
