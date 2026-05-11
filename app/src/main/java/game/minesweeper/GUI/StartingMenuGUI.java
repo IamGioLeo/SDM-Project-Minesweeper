@@ -175,7 +175,7 @@ public class StartingMenuGUI {
         Game<Coordinate> game = new Game<>(grid);
         GameController controller = new GameController(game);
 
-        new SwingUI().start(controller, grid, mines);
+        new GridGUI().start(controller, grid, mines);
 
     }
 
