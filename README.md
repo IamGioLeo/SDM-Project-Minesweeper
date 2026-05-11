@@ -36,7 +36,17 @@ Run the application:
 ./gradlew run
 ```
 
+For a cleaner terminal output when using the CLI version, it is recommended to run:
 
+```bash
+./gradlew run --console=plain
+```
+
+To start the game directly in GUI mode:
+
+```bash
+./gradlew run -Pmode=GUI
+```
 
 ## How to Play
 
