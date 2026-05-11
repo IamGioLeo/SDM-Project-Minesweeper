@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class GridGUI {
+public class SwingGUI {
 
     private GridOfSquares grid;
     private GameController controller;
