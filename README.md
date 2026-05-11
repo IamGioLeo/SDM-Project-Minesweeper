@@ -12,7 +12,8 @@ A Java implementation of the classic Minesweeper game, featuring both a Command 
 
 ## Requirements
 
-- Java 25 or newer
+- Internet connection for automatic JDK download (if Java 25 is not installed)
+- Gradle Wrapper included (no manual Gradle installation required)s
 
 ## Build and Run
 
@@ -35,7 +36,17 @@ Run the application:
 ./gradlew run
 ```
 
+For a cleaner terminal output when using the CLI version, it is recommended to run:
 
+```bash
+./gradlew run --console=plain
+```
+
+To start the game directly in GUI mode:
+
+```bash
+./gradlew run -Pmode=GUI
+```
 
 ## How to Play
 
