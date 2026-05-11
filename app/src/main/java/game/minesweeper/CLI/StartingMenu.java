@@ -119,7 +119,7 @@ public class StartingMenu {
         while (true) {
             System.out.println("How many mines?");
             configuration[2] = scanner.nextInt();
-            if (configuration[0] * configuration[1] <= configuration[2]) {
+            if (configuration[0] * configuration[1] < configuration[2]) {
                 System.out.println("There are too many mines!\n");
                 continue;
             }

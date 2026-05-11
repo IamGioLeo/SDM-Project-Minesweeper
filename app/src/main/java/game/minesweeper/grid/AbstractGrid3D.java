@@ -1,5 +1,6 @@
 package game.minesweeper.grid;
 
+import java.security.InvalidParameterException;
 import java.util.List;
 
 public abstract class AbstractGrid3D extends AbstractGrid<Coordinate3D> {
@@ -9,6 +10,11 @@ public abstract class AbstractGrid3D extends AbstractGrid<Coordinate3D> {
     protected final int depth;
 
     public AbstractGrid3D(int width, int height, int depth) {
+
+        if (width <= 0 ||height <= 0 || depth <= 0) {
+            throw new InvalidGridSizeException(width, height, depth);
+        }
+
         this.width = width;
         this.height = height;
         this.depth = depth;

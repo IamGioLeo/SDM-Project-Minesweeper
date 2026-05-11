@@ -1,9 +1,6 @@
 package game.minesweeper.gridTests;
 
-import game.minesweeper.grid.AbstractGrid2D;
-import game.minesweeper.grid.Cell;
-import game.minesweeper.grid.Coordinate;
-import game.minesweeper.grid.GridOfSquares;
+import game.minesweeper.grid.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -37,6 +34,22 @@ public interface Grid2DContract extends GridContractTest<Coordinate, AbstractGri
 
     default int internalColumn() {
         return 1;
+    }
+
+    AbstractGrid2D createGridWithSize(int numberOfRows, int numberOfColumns);
+
+    @Test
+    default void constructorThrowsExceptionForInvalidRows() {
+        assertThrows(InvalidGridSizeException.class, () -> {
+            createGridWithSize(0, 5);
+        });
+    }
+
+    @Test
+    default void constructorThrowsExceptionForInvalidColumns() {
+        assertThrows(InvalidGridSizeException.class, () -> {
+            createGridWithSize(5, 0);
+        });
     }
 
     @Test

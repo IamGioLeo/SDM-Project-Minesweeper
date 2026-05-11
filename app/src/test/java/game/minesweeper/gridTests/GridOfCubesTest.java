@@ -52,6 +52,11 @@ public class GridOfCubesTest implements Grid3DContract {
     }
 
     @Override
+    public AbstractGrid3D createGridWithSizes(int width, int height, int depth) {
+        return new GridOfCubes(width, height, depth);
+    }
+
+    @Override
     public AbstractGrid3D createGrid() {
         return new GridOfCubes(expectedWidth(), expectedHeight(), expectedDepth());
     }

@@ -1,5 +1,6 @@
 package game.minesweeper.gridTests;
 
+import game.minesweeper.grid.AbstractGrid2D;
 import game.minesweeper.grid.Coordinate;
 import game.minesweeper.grid.GridOfHexagons;
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,7 @@ public class GridOfHexagonsTest implements Grid2DContract {
 
     @Override
     public Coordinate borderCoordinate() {
-        return new Coordinate(5,1);
+        return new Coordinate(5, 1);
     }
 
     @Override
@@ -32,6 +33,11 @@ public class GridOfHexagonsTest implements Grid2DContract {
     @Override
     public int expectedNumberOfColumns() {
         return 9;
+    }
+
+    @Override
+    public GridOfHexagons createGridWithSize(int numberOfRows, int numberOfColumns) {
+        return new GridOfHexagons(numberOfRows, numberOfColumns);
     }
 
     @Override
@@ -66,7 +72,7 @@ public class GridOfHexagonsTest implements Grid2DContract {
 
         int numberOfNeighbors = grid.getCellNeighbors(coordinate).size();
 
-        assertEquals(3,  numberOfNeighbors);
+        assertEquals(3, numberOfNeighbors);
     }
 
     @Test
@@ -78,8 +84,8 @@ public class GridOfHexagonsTest implements Grid2DContract {
         int numberOfNeighbors = grid.getCellNeighbors(coordinate).size();
         int numberOfNeighbors2 = grid.getCellNeighbors(coordinate2).size();
 
-        assertEquals(3,  numberOfNeighbors);
-        assertEquals(5,  numberOfNeighbors2);
+        assertEquals(3, numberOfNeighbors);
+        assertEquals(5, numberOfNeighbors2);
     }
 
     @Test
@@ -91,7 +97,7 @@ public class GridOfHexagonsTest implements Grid2DContract {
         int numberOfNeighbors = grid.getCellNeighbors(coordinate).size();
         int numberOfNeighbors2 = grid.getCellNeighbors(coordinate2).size();
 
-        assertEquals(4,  numberOfNeighbors);
-        assertEquals(4,  numberOfNeighbors2);
+        assertEquals(4, numberOfNeighbors);
+        assertEquals(4, numberOfNeighbors2);
     }
 }
