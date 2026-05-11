@@ -10,6 +10,17 @@ A Java implementation of the classic Minesweeper game, featuring both a Command 
     - Hard
 - Customizable grid size and mine count
 
+## Build and Run
+
+1) Clone the repository:
+  'git clone https://github.com/matteocrosariol/SDM-Project-Minesweeper.git'
+2) Build the project with Gradle:
+   '/gradlew build'
+3) Run the application using Gradle:
+   './gradlew run'
+
+
+
 ## How to Play
 
 The goal of Minesweeper is to reveal all safe cells without opening a mine.
