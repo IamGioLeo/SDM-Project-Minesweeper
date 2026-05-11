@@ -1,6 +1,7 @@
 package game.minesweeper;
 
 import game.minesweeper.engine.GridInitializer;
+import game.minesweeper.engine.InvalidNumberOfMinesException;
 import game.minesweeper.grid.Cell;
 import game.minesweeper.grid.Coordinate;
 import game.minesweeper.grid.GridOfSquares;
@@ -65,5 +66,14 @@ public class GridInitializerTest {
         assertEquals(2, c2NeighborsMineCount);
         assertEquals(1, c4NeighborsMineCount);
 
+    }
+
+    @Test
+    void initializeThrowsExceptionForIncorrectMines() {
+        GridOfSquares grid = new GridOfSquares(9, 9);
+        GridInitializer<Coordinate> initializer = new GridInitializer<>(grid);
+
+        assertThrows(InvalidNumberOfMinesException.class, () -> initializer.initialize(1000));
+        assertThrows(InvalidNumberOfMinesException.class, () -> initializer.initialize(-1));
     }
 }
