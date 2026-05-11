@@ -18,6 +18,9 @@ public class GridInitializer<C extends CoordinateInterface> {
     }
 
     public void initialize(int mineCount) {
+        if  (mineCount < 0 || mineCount >= grid.getAllCoordinates().size()) {
+            throw new InvalidNumberOfMinesException(mineCount);
+        }
         this.minesCoordinate = generateRandomSetOfCoordinates(mineCount);
         placeMines();
     }
