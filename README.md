@@ -13,7 +13,7 @@ A Java implementation of the classic Minesweeper game, featuring both a Command 
 ## Requirements
 
 - Internet connection for automatic JDK download (if Java 25 is not installed)
-- Gradle Wrapper included (no manual Gradle installation required)s
+- Gradle Wrapper included (no manual Gradle installation required)
 
 ## Build and Run
 
